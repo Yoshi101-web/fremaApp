@@ -9,10 +9,11 @@ jobs:
       # Specify the version you desire here
       - image: circleci/php:7.3-node-browsers
       - image: circleci/mysql:5.7-ram
-        environment:
-          MYSQL_DATABASE: fremaApp
-          MYSQL_PASSWORD: root
-          MYSQL_ROOT_PASSWORD: root
+          environment:
+            MYSQL_DATABASE: fremaApp
+            MYSQL_USER: root
+            MYSQL_PASSWORD: root
+            MYSQL_ROOT_PASSWORD: root
     environment:
       APP_ENV: testing
       DB_CONNECTION: mysql
