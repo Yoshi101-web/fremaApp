@@ -9,14 +9,24 @@ jobs:
       # Specify the version you desire here
       - image: circleci/php:7.3-node-browsers
       - image: circleci/mysql:5.7
+
     environment:
-      APP_ENV: testing
-      DB_CONNECTION: mysql
-      DB_HOST: mysql
-      DB_PORT: 3306
-      DB_DATABASE: fremaApp
-      DB_USERNAME: root
-      DB_PASSWORD: root
+      - APP_DEBUG: true
+      - APP_ENV: testing
+      - APP_KEY: base64:+fxjrSC+cwhzCLnL69ERDOb3fe3Gsm+hyNKB8LvqDqA=
+      - DB_CONNECTION: circle_test
+      - MYSQL_ALLOW_EMPTY_PASSWORD: true
+    #     environment:
+    #       MYSQL_DATABASE: fremaApp
+    #       MYSQL_PASSWORD: root
+    # environment:
+    #   APP_ENV: testing
+    #   DB_CONNECTION: mysql
+    #   DB_HOST: mysql
+    #   DB_PORT: 3306
+    #   DB_DATABASE: fremaApp
+    #   DB_USERNAME: root
+    #   DB_PASSWORD: root
 
     steps:
       - checkout
