@@ -7,6 +7,7 @@ use Validator;
 use App\Item;
 use Illuminate\Http\Request;
 
+
 class ItemController extends Controller
 {
     // public function __construct()
@@ -21,7 +22,8 @@ class ItemController extends Controller
      */
     public function index()
     {
-        return view('top');
+        $items = Item::query()->orderBy('created_at', 'desc')->paginate(9);
+        return view('top', compact('items'));
     }
 
     /**
