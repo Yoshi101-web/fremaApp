@@ -3,6 +3,7 @@
 @section('title','商品詳細')
 
 @section('css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.3/css/swiper.min.css">
     <link href="{{ asset('css/swiper.css') }}" rel="stylesheet">
 @endsection
 
@@ -86,8 +87,10 @@
             </div>
         </div>
     </div>
-
-
-
     @include('common.footer')
+@endsection
+
+@section('script')
+    <script src="{{ asset('js/swiper.js') }}" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.3/js/swiper.min.js"></script>
 @endsection
