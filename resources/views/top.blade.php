@@ -13,12 +13,13 @@
         @foreach($items as $item)
             <div class="col-md-4 mt-2">
                 <div class="card mb50">
-                    <div class="card-body">
-                        <div class="image-wrapper"><img class="photo" src="{{ asset('images/dummy.png')}}"></div>{{-- asset('storage/images/'.$item->image) --}}
-                        <p class="product-title">{{ $item->title }}</p>
-                        <p class="product-price">{{ $item->price }}</p>
-                        <a href="" class='btn btn-secondary detail-btn'>詳細を読む</a>
-                    </div>
+                    <a href="{{ route('item.show', $item->id) }}" class="card-body btn">
+                        <div class="image-wrapper"><img class="img-thumbnail" src="{{ asset('images/dummy.png')}}"></div>{{-- asset('storage/images/'.$item->image) --}}
+                        <div class="justify-center align-center">
+                            <p class="product-title m-auto">{{ $item->item_name }}</p>
+                            <p class="product-price text-center m-auto pt-1 h4 font-weight-bold">¥{{ number_format($item->price) }}</p>
+                        </div>
+                    </a>
                 </div>
             </div>
         @endforeach
