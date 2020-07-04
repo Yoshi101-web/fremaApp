@@ -12,4 +12,4 @@ $factory->define(App\Image::class, function (Faker $faker) {
             return factory(App\Item::class)->create()->id;
         },
     ];
-});
+}); 
