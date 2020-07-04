@@ -21,7 +21,7 @@ class CreateItemsTable extends Migration
             $table->integer('category_child_id');
             $table->string('brand_name')->nullable();
             $table->longText('description');
-            $table->string('prince');
+            $table->string('price');
             $table->string('size')->nullable();
             $table->string('condition');
             $table->string('shipping_fee_payer');
