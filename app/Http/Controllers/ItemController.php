@@ -20,10 +20,17 @@ class ItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $items = Item::query()->orderBy('created_at', 'desc')->paginate(9);
-        return view('top', compact('items'));
+        $keyword = $request->input('keyword');
+        // $items = Item::all();
+        // $items = Item::query()->orderBy('created_at', 'desc')->paginate(9);
+        if($request->has('keyword')){
+            $items = Item::where('item_name', 'like', '%'.$keyword.'%')->orderBy('created_at', 'desc')->paginate(9);
+        } else {
+            $items = Item::query()->orderBy('created_at', 'desc')->paginate(9);
+        }
+        return view('top', compact('items', 'keyword'));
     }
 
     /**

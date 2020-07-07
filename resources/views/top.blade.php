@@ -25,7 +25,7 @@
         @endforeach
         </div>
         <div class="mt-4 row justify-content-center">
-            {{ $items->links() }}
+            {{ $items->appends(['keyword' => Request::get('keyword')])->links() }}
         </div>
     </div>
     @include('common.footer')

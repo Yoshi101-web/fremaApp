@@ -4,18 +4,19 @@
         <a class="navbar-brand mr-lg-5" href="{{ url('/') }}">
             FreeMa
         </a>
-        <form>
+        <form method="GET" action="/">
             <div class="input-group input-group-md ml-lg-5 col-sm-30">
-                <input type="text" class="form-control" placeholder="検索">
+                <input type="text" class="form-control" name="keyword" value="@if (isset( $keyword )) {{$keyword}}  @endif">
                 <span class="input-group-btn">
-		<button type="button" class="btn btn-outline-dark">ボタン</button>
-	</span>
+                    <button type="submit" class="btn btn-outline-dark">検索</button>
+                </span>
             </div>
         </form>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>
         </button>
+
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
