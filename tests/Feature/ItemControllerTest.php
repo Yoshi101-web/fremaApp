@@ -2,30 +2,20 @@
 
 namespace Tests\Feature;
 
-use App\User;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class ItemControllerTest extends TestCase
 {
-    use DatabaseTransactions; //テストの実行後にDBをロールバックし、テスト実行中にDBに作ったデータが残らない。 増えない。
     /**
-     * A basic feature test example.
+     * A basic test example.
      *
      * @return void
      */
-    public function testTopView()
+    public function testBasicTest()
     {
-        $user = factory(User::class)->create();
+        $response = $this->get('/');
 
-        $response = $this
-            ->actingAs($user)
-            ->get('/');
-
-        $response->assertStatus(200)
-            ->assertViewIs('top')
-            ->assertSee('FreMa 2020 copyright');
+        $response->assertStatus(200);
     }
 }
