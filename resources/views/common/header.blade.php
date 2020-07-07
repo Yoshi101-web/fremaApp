@@ -6,7 +6,7 @@
         </a>
         <form method="GET" action="/">
             <div class="input-group input-group-md ml-lg-5 col-sm-30">
-                <input type="text" class="form-control" name="keyword" value="@if (isset( $keyword )) {{$keyword}}  @endif">
+                <input type="text" class="form-control" name="keyword" value="@if (isset( $keyword )) {{$keyword}} @endif">
                 <span class="input-group-btn">
                     <button type="submit" class="btn btn-outline-dark">検索</button>
                 </span>
