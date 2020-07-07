@@ -8,8 +8,8 @@
 
 @section('content')
     @include('common.header')
-    <div class="container">
-        <div class="row justify-content-center">
+    <div class="container ">
+        <div class="row flex-wrap min-vh-100">
         @foreach($items as $item)
             <div class="col-md-4 mt-2">
                 <div class="card mb50">
