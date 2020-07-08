@@ -15,13 +15,14 @@ class CreateItemsTable extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('item_name');
             $table->bigInteger('user_id')->unsigned(); //MySQLで整数カラムを符号なしに設定
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('category_id');
             $table->integer('category_child_id');
             $table->string('brand_name')->nullable();
             $table->longText('description');
-            $table->string('prince');
+            $table->string('price');
             $table->string('size')->nullable();
             $table->string('condition');
             $table->string('shipping_fee_payer');

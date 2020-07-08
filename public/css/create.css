@@ -1,0 +1,23 @@
+.post-btn {
+    width: 120px;
+    height: 120px;
+    background-color: rgb(60, 135, 199);
+    border-radius: 60px;
+    border: 3px solid rgba(40, 40, 41,0.2);
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    cursor: pointer;
+    user-select:none;
+}
+.post-btn__name {
+    text-align: center;
+    color: white;
+    font-size: 2em;
+    font-weight: bold;
+    line-height: 120px;
+    text-shadow:1px 1px 0 black, -1px -1px 0 black,
+                -1px 1px 0 black, 1px -1px 0 black,
+                0px 1px 0 black,  0-1px 0 black,
+                -1px 0 0 black, 1px 0 0 black;
+}

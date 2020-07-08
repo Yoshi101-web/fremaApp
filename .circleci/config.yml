@@ -57,6 +57,6 @@ jobs:
             - node_modules
       - run: npm run dev
 
-      - run:
-          name: Run PHPUnit
-          command: vendor/bin/phpunit
+      # - run:
+      #     name: Run PHPUnit
+      #     command: vendor/bin/phpunit
