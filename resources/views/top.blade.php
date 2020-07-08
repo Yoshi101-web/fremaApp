@@ -4,11 +4,12 @@
 
 @section('css')
     <link href="{{ asset('css/top.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/create.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
     @include('common.header')
-    <div class="container ">
+    <div class="container" style="position: relative">
         <div class="row flex-wrap min-vh-100">
         @foreach($items as $item)
             <div class="col-md-4 mt-2">
@@ -28,5 +29,10 @@
             {{ $items->appends(['keyword' => Request::get('keyword')])->links() }}
         </div>
     </div>
+    <a href="{{ route('item.create') }}">
+        <div class="post-btn ">
+            <p class="post-btn__name">出品</p>
+        </div>
+        </a>
     @include('common.footer')
 @endsection
