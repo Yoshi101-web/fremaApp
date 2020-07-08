@@ -1,26 +1,19 @@
-<div class="form-row">
-    <div class="form-group col-md-6">
-        <label for="name">氏名</label>
-        @if(Request::has('confirm'))
-            <p class="form-control-static">{{ old('name') }}</p>
-            <input id="name" type="hidden" name="name" value="{{ old('name') }}">
-        @else
-            <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}">
-        @endif
-    </div>
-</div>
-
 <template>
-
     <div class="form-container">
         <div class="form-row">
             <div class="form-group">
 
                     <label label for="image-uploader">
-                        <p class="mb-0 h6 font-weight-bold">商品画像</p>
-                        <p class="mb-0">最大10枚までアップロードできます</p>
+                        <div class="d-flex align-items-end mb-0">
+                            <p class="mb-0 h6 font-weight-bold">商品画像</p>
+                            <div class="require-content">
+                                <p class="require font-weight-bold">必須</p>
+                            </div>
+                        </div>
+                        <p class="mb-0 block">最大10枚までアップロードできます</p>
                     </label>
-                    <div id="image-uploader" class="card-body px-5 mb-3">
+
+                    <div id="image-uploader" class="card-body pt-1 px-5 mb-3">
                         <div class="drag-drop-content d-flex align-items-center justify-content-center">
                             <div class="dd-text-group">
                                 <p class="mb-0 text-center">ドラッグアンドドロップ</p>
@@ -53,7 +46,7 @@
                         <p class="require font-weight-bold">必須</p>
                     </div>
                 </label>
-                <textarea  id="description" name="description" class="w-100" rows="10" value="Nike:テスト" placeholder="内容"></textarea>
+                <textarea  id="description" name="description" class="w-100 form-control" rows="10" value="Nike:テスト" placeholder="内容"></textarea>
             </div>
         </div>
 
@@ -167,11 +160,11 @@
     border: 5px dashed gray;
     cursor: pointer;
     &:hover {
-        background-color: rgba(130, 180, 219,0.2);
-        border: 5px dashed rgba(130, 180, 219,0.8);
+        background-color: rgba(130, 180, 229,0.05);
+        border: 5px dashed rgba(130, 180, 229,0.85);
     }
     &:hover .dd-text-group {
-        color: rgba(130, 180, 219,0.8);
+        color: rgba(130, 180, 229,0.9);
     }
 }
 .require-content {

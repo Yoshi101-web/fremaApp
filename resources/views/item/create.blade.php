@@ -14,7 +14,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    出品
+                    <p class="text-center font-weight-bold h1 mb-0 py-3">出品</p>
                 </div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('item.store') }}">
