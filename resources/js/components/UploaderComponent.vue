@@ -1,0 +1,205 @@
+<div class="form-row">
+    <div class="form-group col-md-6">
+        <label for="name">氏名</label>
+        @if(Request::has('confirm'))
+            <p class="form-control-static">{{ old('name') }}</p>
+            <input id="name" type="hidden" name="name" value="{{ old('name') }}">
+        @else
+            <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}">
+        @endif
+    </div>
+</div>
+
+<template>
+
+    <div class="form-container">
+        <div class="form-row">
+            <div class="form-group">
+
+                    <label label for="image-uploader">
+                        <p class="mb-0 h6 font-weight-bold">商品画像</p>
+                        <p class="mb-0">最大10枚までアップロードできます</p>
+                    </label>
+                    <div id="image-uploader" class="card-body px-5 mb-3">
+                        <div class="drag-drop-content d-flex align-items-center justify-content-center">
+                            <div class="dd-text-group">
+                                <p class="mb-0 text-center">ドラッグアンドドロップ</p>
+                                <p class="mb-0 text-center">またはクリックしてファイルをアップロード</p>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+
+        <div class="form-row">  
+            <div class="form-group">
+                <label for="item_name" class="d-flex align-items-end">
+                    <p class="font-weight-bold mb-0">商品名</p>
+                    <div class="require-content">
+                        <p class="require font-weight-bold">必須</p>
+                    </div>
+                </label>
+                <input id="item_name" type="text" class="form-control" name="item_name" value="アイテム" placeholder="内容">
+            </div>
+        </div>
+
+
+        <div class="form-row">  
+            <div class="form-group">
+                <label for="description" class="d-flex align-items-end">
+                    <p class="font-weight-bold mb-0">商品の説明</p>
+                    <div class="require-content">
+                        <p class="require font-weight-bold">必須</p>
+                    </div>
+                </label>
+                <textarea  id="description" name="description" class="w-100" rows="10" value="Nike:テスト" placeholder="内容"></textarea>
+            </div>
+        </div>
+
+
+        <div class="form-row">  
+            <div class="form-group">
+                <label for="category" class="d-flex align-items-end">
+                    <p class="font-weight-bold mb-0">カテゴリー</p>
+                    <div class="require-content">
+                        <p class="require font-weight-bold">必須</p>
+                    </div>
+                </label>
+                <input id="category" type="text" class="form-control" name="category_id" value="カテゴリー01">
+                <input id="category" type="text" class="form-control" name="category_child_id" value="カテゴリー02">
+            </div>
+        </div>
+
+        <div class="form-row">  
+            <div class="form-group">
+                <label for="brand_name" class="d-flex align-items-end">
+                    <p class="font-weight-bold mb-0">ブランド</p>
+                    <div class="optional-content">
+                        <p class="optional font-weight-bold">任意</p>
+                    </div>
+                </label>
+                <input id="brand_name" type="text" class="form-control" name="brand_name" value="ブランド">
+            </div>
+        </div>
+
+
+        <div class="form-row">  
+            <div class="form-group">
+                <label for="size" class="d-flex align-items-end">
+                    <p class="font-weight-bold mb-0">サイズ</p>
+                    <div class="optional-content">
+                        <p class="optional font-weight-bold">任意</p>
+                    </div>
+                </label>
+                <input id="size" type="text" class="form-control" name="size" value="サイズ">
+            </div>
+        </div>
+
+        <div class="form-row">  
+            <div class="form-group">
+                <label for="condition" class="d-flex align-items-end">
+                    <p class="font-weight-bold mb-0">商品の状態</p>
+                    <div class="require-content">
+                        <p class="require font-weight-bold">必須</p>
+                    </div>
+                </label>
+                <input id="condition" type="text" class="form-control" name="condition" value="商品の状態" placeholder="商品の状態・内容">
+            </div>
+        </div>
+
+        <div class="form-row">  
+            <div class="form-group">
+                <label for="shipping_fee_payer" class="d-flex align-items-end">
+                    <p class="font-weight-bold mb-0">配送料の負担</p>
+                    <div class="require-content">
+                        <p class="require font-weight-bold">必須</p>
+                    </div>
+                </label>
+                <input id="shipping_fee_payer" type="text" class="form-control" name="shipping_fee_payer" value="配送料" placeholder="配送料の負担">
+            </div>
+        </div>
+
+        <div class="form-row">  
+            <div class="form-group">
+                <label for="shipping_days" class="d-flex align-items-end">
+                    <p class="font-weight-bold mb-0">発送までの日数</p>
+                    <div class="require-content">
+                        <p class="require font-weight-bold">必須</p>
+                    </div>
+                </label>
+                <input id="shipping_days" type="text" class="form-control" name="shipping_days" value="アイテム" placeholder="内容">
+            </div>
+        </div>
+
+        <div class="form-row">  
+            <div class="form-group">
+                <label for="price" class="d-flex align-items-end">
+                    <p class="font-weight-bold mb-0">販売価格 (¥300〜¥9,999,999)</p>
+                    <div class="require-content">
+                        <p class="require font-weight-bold">必須</p>
+                    </div>
+                </label>
+                <input id="price" type="text" class="form-control" name="price" value="アイテム" placeholder="内容">
+            </div>
+        </div>
+        
+        <div class="form-row justify-content-center">  
+            <button type="submit" class="btn btn-primary btn-lg">出品する</button>
+        </div>
+    </div>
+</template>
+
+<script>
+    export default {
+        mounted() {
+            console.log('Component mounted.')
+        }
+    }
+</script>
+
+<style lang="scss" scoped>
+.form-group {
+    width: 100%;
+}
+.drag-drop-content {
+    height: 200px;
+    border: 5px dashed gray;
+    cursor: pointer;
+    &:hover {
+        background-color: rgba(130, 180, 219,0.2);
+        border: 5px dashed rgba(130, 180, 219,0.8);
+    }
+    &:hover .dd-text-group {
+        color: rgba(130, 180, 219,0.8);
+    }
+}
+.require-content {
+    height: 18px;
+    line-height: 18px;
+    background-color: red;
+    border-radius: 4px;
+    margin-left: 5px;
+    padding: 0px 3px;
+    margin-bottom: 2px;
+    .require {
+        color: white;
+        font-size: 0.5rem;
+    }
+}
+
+.optional-content {
+    height: 18px;
+    line-height: 18px;
+    background-color: gray;
+    border-radius: 4px;
+    margin-left: 5px;
+    padding: 0px 3px;
+    margin-bottom: 2px;
+    .optional {
+        color: white;
+        font-size: 0.5rem;
+    }
+}
+
+</style>
