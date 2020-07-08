@@ -2079,13 +2079,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -6536,7 +6529,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".form-group[data-v-465f17d4] {\n  width: 100%;\n}\n.drag-drop-content[data-v-465f17d4] {\n  height: 200px;\n  border: 5px dashed gray;\n  cursor: pointer;\n}\n.drag-drop-content[data-v-465f17d4]:hover {\n  background-color: rgba(130, 180, 219, 0.2);\n  border: 5px dashed rgba(130, 180, 219, 0.8);\n}\n.drag-drop-content:hover .dd-text-group[data-v-465f17d4] {\n  color: rgba(130, 180, 219, 0.8);\n}\n.require-content[data-v-465f17d4] {\n  height: 18px;\n  line-height: 18px;\n  background-color: red;\n  border-radius: 4px;\n  margin-left: 5px;\n  padding: 0px 3px;\n  margin-bottom: 2px;\n}\n.require-content .require[data-v-465f17d4] {\n  color: white;\n  font-size: 0.5rem;\n}\n.optional-content[data-v-465f17d4] {\n  height: 18px;\n  line-height: 18px;\n  background-color: gray;\n  border-radius: 4px;\n  margin-left: 5px;\n  padding: 0px 3px;\n  margin-bottom: 2px;\n}\n.optional-content .optional[data-v-465f17d4] {\n  color: white;\n  font-size: 0.5rem;\n}", ""]);
+exports.push([module.i, ".form-group[data-v-465f17d4] {\n  width: 100%;\n}\n.drag-drop-content[data-v-465f17d4] {\n  height: 200px;\n  border: 5px dashed gray;\n  cursor: pointer;\n}\n.drag-drop-content[data-v-465f17d4]:hover {\n  background-color: rgba(130, 180, 229, 0.05);\n  border: 5px dashed rgba(130, 180, 229, 0.85);\n}\n.drag-drop-content:hover .dd-text-group[data-v-465f17d4] {\n  color: rgba(130, 180, 229, 0.9);\n}\n.require-content[data-v-465f17d4] {\n  height: 18px;\n  line-height: 18px;\n  background-color: red;\n  border-radius: 4px;\n  margin-left: 5px;\n  padding: 0px 3px;\n  margin-bottom: 2px;\n}\n.require-content .require[data-v-465f17d4] {\n  color: white;\n  font-size: 0.5rem;\n}\n.optional-content[data-v-465f17d4] {\n  height: 18px;\n  line-height: 18px;\n  background-color: gray;\n  border-radius: 4px;\n  margin-left: 5px;\n  padding: 0px 3px;\n  margin-bottom: 2px;\n}\n.optional-content .optional[data-v-465f17d4] {\n  color: white;\n  font-size: 0.5rem;\n}", ""]);
 
 // exports
 
@@ -38340,11 +38333,19 @@ var staticRenderFns = [
       _c("div", { staticClass: "form-row" }, [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { label: "", for: "image-uploader" } }, [
-            _c("p", { staticClass: "mb-0 h6 font-weight-bold" }, [
-              _vm._v("商品画像")
+            _c("div", { staticClass: "d-flex align-items-end mb-0" }, [
+              _c("p", { staticClass: "mb-0 h6 font-weight-bold" }, [
+                _vm._v("商品画像")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "require-content" }, [
+                _c("p", { staticClass: "require font-weight-bold" }, [
+                  _vm._v("必須")
+                ])
+              ])
             ]),
             _vm._v(" "),
-            _c("p", { staticClass: "mb-0" }, [
+            _c("p", { staticClass: "mb-0 block" }, [
               _vm._v("最大10枚までアップロードできます")
             ])
           ]),
@@ -38352,7 +38353,7 @@ var staticRenderFns = [
           _c(
             "div",
             {
-              staticClass: "card-body px-5 mb-3",
+              staticClass: "card-body pt-1 px-5 mb-3",
               attrs: { id: "image-uploader" }
             },
             [
@@ -38435,7 +38436,7 @@ var staticRenderFns = [
           ),
           _vm._v(" "),
           _c("textarea", {
-            staticClass: "w-100",
+            staticClass: "w-100 form-control",
             attrs: {
               id: "description",
               name: "description",
@@ -51029,8 +51030,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _UploaderComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _UploaderComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var _UploaderComponent_vue_vue_type_style_index_0_id_465f17d4_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./UploaderComponent.vue?vue&type=style&index=0&id=465f17d4&lang=scss&scoped=true& */ "./resources/js/components/UploaderComponent.vue?vue&type=style&index=0&id=465f17d4&lang=scss&scoped=true&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-/* harmony import */ var _UploaderComponent_vue_vue_type_custom_index_0_blockType_div_class_form_row__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./UploaderComponent.vue?vue&type=custom&index=0&blockType=div&class=form-row */ "./resources/js/components/UploaderComponent.vue?vue&type=custom&index=0&blockType=div&class=form-row");
-/* harmony import */ var _UploaderComponent_vue_vue_type_custom_index_0_blockType_div_class_form_row__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_UploaderComponent_vue_vue_type_custom_index_0_blockType_div_class_form_row__WEBPACK_IMPORTED_MODULE_4__);
 
 
 
@@ -51050,25 +51049,10 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   
 )
 
-/* custom blocks */
-
-if (typeof _UploaderComponent_vue_vue_type_custom_index_0_blockType_div_class_form_row__WEBPACK_IMPORTED_MODULE_4___default.a === 'function') _UploaderComponent_vue_vue_type_custom_index_0_blockType_div_class_form_row__WEBPACK_IMPORTED_MODULE_4___default()(component)
-
 /* hot reload */
 if (false) { var api; }
 component.options.__file = "resources/js/components/UploaderComponent.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/UploaderComponent.vue?vue&type=custom&index=0&blockType=div&class=form-row":
-/*!************************************************************************************************************!*\
-  !*** ./resources/js/components/UploaderComponent.vue?vue&type=custom&index=0&blockType=div&class=form-row ***!
-  \************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-
 
 /***/ }),
 
