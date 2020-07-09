@@ -3,23 +3,40 @@
         <div class="form-row">
             <div class="form-group">
 
-                    <label label for="image-uploader">
+                    <label for="image-uploader">
                         <div class="d-flex align-items-end mb-0">
                             <p class="mb-0 h6 font-weight-bold">商品画像</p>
                             <div class="require-content">
                                 <p class="require font-weight-bold">必須</p>
                             </div>
                         </div>
-                        <p class="mb-0 block">最大10枚までアップロードできます</p>
+                        <p class="mb-0 block">最大8枚までアップロードできます</p>
                     </label>
 
                     <div id="image-uploader" class="card-body pt-1 px-5 mb-3">
-                        <div class="drag-drop-content d-flex align-items-center justify-content-center">
+                        <label for="uploader-btn" class="drag-drop-content d d-flex align-items-center justify-content-center"
+                        @dragenter="dragEnter"
+                        @dragleave="dragLeave"
+                        @dragover.prevent
+                        @drop.prevent="dropFile"
+                        :class="{drag: isDrag}"
+                        >
                             <div class="dd-text-group">
-                                <p class="mb-0 text-center">ドラッグアンドドロップ</p>
-                                <p class="mb-0 text-center">またはクリックしてファイルをアップロード</p>
+                                <p class="mb-0 text-center user-select-none">ドラッグアンドドロップ</p>
+                                <p class="mb-0 text-center user-select-none">またはクリックしてファイルをアップロード</p>
+                                <input id="uploader-btn" type="file" multiple="multiple" v-on:change="fileSelected" style="display: none;" >
                             </div>
-                        </div>
+                        </label>
+                    </div>
+                    <div class="container">
+                        <ul class="row flex-wrap">
+                            <li class="card" v-for="(image, index) in images" :key="index">
+                                <div class="image-wrapper"><img class="h-100 img-thumbnail" v-show="images" :src="image.path" /></div>
+                                <label for="delete-image" class="card-body my-0 btn bg-secondary">
+                                    <p id="delete-image" class="text-center font-weight-bold text-light" @click="deleteFile(index)">削除</p>
+                                </label>
+                            </li>
+                        </ul>
                     </div>
             </div>
         </div>
@@ -144,29 +161,104 @@
 </template>
 
 <script>
-    export default {
-        mounted() {
-            console.log('Component mounted.')
+export default {
+    data() {
+        return {
+            isDrag: false,
+            images: [],
+            files: []
         }
+    },
+    methods: {
+        dragEnter() {
+            this.isDrag = true;
+            console.log('dragEnter');
+        },
+        dragLeave() {
+            this.isDrag = false;
+            console.log('dragLeave');
+        },
+        dragOver() {
+            this.isDrag = true;
+            console.log('dragOver');
+        },
+
+        dropFile() {
+            var fileList = [...event.dataTransfer.files];
+            this.fileForeach(fileList)
+            for(var i=0; i<fileList.length; i++){
+                this.files.push(fileList[i])
+            }
+            this.isDrag = false;
+        },
+        
+        fileSelected() {
+            var fileList = event.target.files || event.dataTransfer.files
+            this.fileForeach(fileList)
+            console.log('fileSelected');
+            for(var i=0; i<fileList.length; i++){
+                this.files.push(fileList[i])
+            }
+        },
+        fileForeach(fileList) {
+            if (!fileList.length) {
+                return false
+            }
+            console.log('fileForeach');
+            _.forEach(fileList, (image, index) => {
+                this.createImage(image)
+            })
+        },
+        createImage (image) {
+            console.log('createImage');
+            var reader = new FileReader()
+            var formData = new FormData()
+            formData.append('file', image)
+            reader.onload = (e) => {
+                var dataURI = e.target.result
+                if (dataURI) {
+                    this.images.push({name: image.name, size: image.size, type: image.type, path: dataURI})
+                // this.$emit('upload-success', formData, this.images.length - 1, this.images)
+                }
+            }
+            reader.readAsDataURL(image)
+        },
+        deleteFile(index) {
+            this.images.splice(index, 1)
+            this.files.splice(index, 1)
+        },
+    },
+    mounted() {
+        window.ondrop = function(e) {
+            e.preventDefault()
+        }
+        window.ondragover = function(e) {
+            e.preventDefault();
+        }
+        console.log('Component mounted.')
     }
+}
 </script>
 
 <style lang="scss" scoped>
 .form-group {
     width: 100%;
 }
+
 .drag-drop-content {
     height: 200px;
     border: 5px dashed gray;
     cursor: pointer;
-    &:hover {
-        background-color: rgba(130, 180, 229,0.05);
-        border: 5px dashed rgba(130, 180, 229,0.85);
-    }
-    &:hover .dd-text-group {
+}
+.drag {
+    background-color: rgba(130, 180, 229,0.05);
+    border: 5px dashed rgba(130, 180, 229,0.85);
+    cursor: pointer;
+    .dd-text-group {
         color: rgba(130, 180, 229,0.9);
     }
 }
+
 .require-content {
     height: 18px;
     line-height: 18px;
@@ -194,5 +286,8 @@
         font-size: 0.5rem;
     }
 }
-
+.image-wrapper {
+    width: 120px;
+    height: 120px;
+}
 </style>

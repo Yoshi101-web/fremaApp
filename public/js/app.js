@@ -1934,6 +1934,35 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2080,7 +2109,97 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      isDrag: false,
+      images: [],
+      files: []
+    };
+  },
+  methods: {
+    dragEnter: function dragEnter() {
+      this.isDrag = true;
+      console.log('dragEnter');
+    },
+    dragLeave: function dragLeave() {
+      this.isDrag = false;
+      console.log('dragLeave');
+    },
+    dragOver: function dragOver() {
+      this.isDrag = true;
+      console.log('dragOver');
+    },
+    dropFile: function dropFile() {
+      var fileList = _toConsumableArray(event.dataTransfer.files);
+
+      this.fileForeach(fileList);
+
+      for (var i = 0; i < fileList.length; i++) {
+        this.files.push(fileList[i]);
+      }
+
+      this.isDrag = false;
+    },
+    fileSelected: function fileSelected() {
+      var fileList = event.target.files || event.dataTransfer.files;
+      this.fileForeach(fileList);
+      console.log('fileSelected');
+
+      for (var i = 0; i < fileList.length; i++) {
+        this.files.push(fileList[i]);
+      }
+    },
+    fileForeach: function fileForeach(fileList) {
+      var _this = this;
+
+      if (!fileList.length) {
+        return false;
+      }
+
+      console.log('fileForeach');
+
+      _.forEach(fileList, function (image, index) {
+        _this.createImage(image);
+      });
+    },
+    createImage: function createImage(image) {
+      var _this2 = this;
+
+      console.log('createImage');
+      var reader = new FileReader();
+      var formData = new FormData();
+      formData.append('file', image);
+
+      reader.onload = function (e) {
+        var dataURI = e.target.result;
+
+        if (dataURI) {
+          _this2.images.push({
+            name: image.name,
+            size: image.size,
+            type: image.type,
+            path: dataURI
+          }); // this.$emit('upload-success', formData, this.images.length - 1, this.images)
+
+        }
+      };
+
+      reader.readAsDataURL(image);
+    },
+    deleteFile: function deleteFile(index) {
+      this.images.splice(index, 1);
+      this.files.splice(index, 1);
+    }
+  },
   mounted: function mounted() {
+    window.ondrop = function (e) {
+      e.preventDefault();
+    };
+
+    window.ondragover = function (e) {
+      e.preventDefault();
+    };
+
     console.log('Component mounted.');
   }
 });
@@ -6529,7 +6648,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".form-group[data-v-465f17d4] {\n  width: 100%;\n}\n.drag-drop-content[data-v-465f17d4] {\n  height: 200px;\n  border: 5px dashed gray;\n  cursor: pointer;\n}\n.drag-drop-content[data-v-465f17d4]:hover {\n  background-color: rgba(130, 180, 229, 0.05);\n  border: 5px dashed rgba(130, 180, 229, 0.85);\n}\n.drag-drop-content:hover .dd-text-group[data-v-465f17d4] {\n  color: rgba(130, 180, 229, 0.9);\n}\n.require-content[data-v-465f17d4] {\n  height: 18px;\n  line-height: 18px;\n  background-color: red;\n  border-radius: 4px;\n  margin-left: 5px;\n  padding: 0px 3px;\n  margin-bottom: 2px;\n}\n.require-content .require[data-v-465f17d4] {\n  color: white;\n  font-size: 0.5rem;\n}\n.optional-content[data-v-465f17d4] {\n  height: 18px;\n  line-height: 18px;\n  background-color: gray;\n  border-radius: 4px;\n  margin-left: 5px;\n  padding: 0px 3px;\n  margin-bottom: 2px;\n}\n.optional-content .optional[data-v-465f17d4] {\n  color: white;\n  font-size: 0.5rem;\n}", ""]);
+exports.push([module.i, ".form-group[data-v-465f17d4] {\n  width: 100%;\n}\n.drag-drop-content[data-v-465f17d4] {\n  height: 200px;\n  border: 5px dashed gray;\n  cursor: pointer;\n}\n.drag[data-v-465f17d4] {\n  background-color: rgba(130, 180, 229, 0.05);\n  border: 5px dashed rgba(130, 180, 229, 0.85);\n  cursor: pointer;\n}\n.drag .dd-text-group[data-v-465f17d4] {\n  color: rgba(130, 180, 229, 0.9);\n}\n.require-content[data-v-465f17d4] {\n  height: 18px;\n  line-height: 18px;\n  background-color: red;\n  border-radius: 4px;\n  margin-left: 5px;\n  padding: 0px 3px;\n  margin-bottom: 2px;\n}\n.require-content .require[data-v-465f17d4] {\n  color: white;\n  font-size: 0.5rem;\n}\n.optional-content[data-v-465f17d4] {\n  height: 18px;\n  line-height: 18px;\n  background-color: gray;\n  border-radius: 4px;\n  margin-left: 5px;\n  padding: 0px 3px;\n  margin-bottom: 2px;\n}\n.optional-content .optional[data-v-465f17d4] {\n  color: white;\n  font-size: 0.5rem;\n}\n.image-wrapper[data-v-465f17d4] {\n  width: 120px;\n  height: 120px;\n}", ""]);
 
 // exports
 
@@ -38322,373 +38441,504 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "form-container" }, [
+    _c("div", { staticClass: "form-row" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "card-body pt-1 px-5 mb-3",
+            attrs: { id: "image-uploader" }
+          },
+          [
+            _c(
+              "label",
+              {
+                staticClass:
+                  "drag-drop-content d d-flex align-items-center justify-content-center",
+                class: { drag: _vm.isDrag },
+                attrs: { for: "uploader-btn" },
+                on: {
+                  dragenter: _vm.dragEnter,
+                  dragleave: _vm.dragLeave,
+                  dragover: function($event) {
+                    $event.preventDefault()
+                  },
+                  drop: function($event) {
+                    $event.preventDefault()
+                    return _vm.dropFile($event)
+                  }
+                }
+              },
+              [
+                _c("div", { staticClass: "dd-text-group" }, [
+                  _c(
+                    "p",
+                    { staticClass: "mb-0 text-center user-select-none" },
+                    [_vm._v("ドラッグアンドドロップ")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "p",
+                    { staticClass: "mb-0 text-center user-select-none" },
+                    [_vm._v("またはクリックしてファイルをアップロード")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticStyle: { display: "none" },
+                    attrs: {
+                      id: "uploader-btn",
+                      type: "file",
+                      multiple: "multiple"
+                    },
+                    on: { change: _vm.fileSelected }
+                  })
+                ])
+              ]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "container" }, [
+          _c(
+            "ul",
+            { staticClass: "row flex-wrap" },
+            _vm._l(_vm.images, function(image, index) {
+              return _c("li", { key: index, staticClass: "card" }, [
+                _c("div", { staticClass: "image-wrapper" }, [
+                  _c("img", {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.images,
+                        expression: "images"
+                      }
+                    ],
+                    staticClass: "h-100 img-thumbnail",
+                    attrs: { src: image.path }
+                  })
+                ]),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "card-body my-0 btn bg-secondary",
+                    attrs: { for: "delete-image" }
+                  },
+                  [
+                    _c(
+                      "p",
+                      {
+                        staticClass: "text-center font-weight-bold text-light",
+                        attrs: { id: "delete-image" },
+                        on: {
+                          click: function($event) {
+                            return _vm.deleteFile(index)
+                          }
+                        }
+                      },
+                      [_vm._v("削除")]
+                    )
+                  ]
+                )
+              ])
+            }),
+            0
+          )
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _vm._m(1),
+    _vm._v(" "),
+    _vm._m(2),
+    _vm._v(" "),
+    _vm._m(3),
+    _vm._v(" "),
+    _vm._m(4),
+    _vm._v(" "),
+    _vm._m(5),
+    _vm._v(" "),
+    _vm._m(6),
+    _vm._v(" "),
+    _vm._m(7),
+    _vm._v(" "),
+    _vm._m(8),
+    _vm._v(" "),
+    _vm._m(9),
+    _vm._v(" "),
+    _vm._m(10)
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-container" }, [
-      _c("div", { staticClass: "form-row" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { label: "", for: "image-uploader" } }, [
-            _c("div", { staticClass: "d-flex align-items-end mb-0" }, [
-              _c("p", { staticClass: "mb-0 h6 font-weight-bold" }, [
-                _vm._v("商品画像")
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "require-content" }, [
-                _c("p", { staticClass: "require font-weight-bold" }, [
-                  _vm._v("必須")
-                ])
-              ])
+    return _c("label", { attrs: { for: "image-uploader" } }, [
+      _c("div", { staticClass: "d-flex align-items-end mb-0" }, [
+        _c("p", { staticClass: "mb-0 h6 font-weight-bold" }, [
+          _vm._v("商品画像")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "require-content" }, [
+          _c("p", { staticClass: "require font-weight-bold" }, [_vm._v("必須")])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "mb-0 block" }, [
+        _vm._v("最大8枚までアップロードできます")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-row" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c(
+          "label",
+          {
+            staticClass: "d-flex align-items-end",
+            attrs: { for: "item_name" }
+          },
+          [
+            _c("p", { staticClass: "font-weight-bold mb-0" }, [
+              _vm._v("商品名")
             ]),
             _vm._v(" "),
-            _c("p", { staticClass: "mb-0 block" }, [
-              _vm._v("最大10枚までアップロードできます")
+            _c("div", { staticClass: "require-content" }, [
+              _c("p", { staticClass: "require font-weight-bold" }, [
+                _vm._v("必須")
+              ])
             ])
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "card-body pt-1 px-5 mb-3",
-              attrs: { id: "image-uploader" }
-            },
-            [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "drag-drop-content d-flex align-items-center justify-content-center"
-                },
-                [
-                  _c("div", { staticClass: "dd-text-group" }, [
-                    _c("p", { staticClass: "mb-0 text-center" }, [
-                      _vm._v("ドラッグアンドドロップ")
-                    ]),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "mb-0 text-center" }, [
-                      _vm._v("またはクリックしてファイルをアップロード")
-                    ])
-                  ])
-                ]
-              )
-            ]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-row" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c(
-            "label",
-            {
-              staticClass: "d-flex align-items-end",
-              attrs: { for: "item_name" }
-            },
-            [
-              _c("p", { staticClass: "font-weight-bold mb-0" }, [
-                _vm._v("商品名")
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "require-content" }, [
-                _c("p", { staticClass: "require font-weight-bold" }, [
-                  _vm._v("必須")
-                ])
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              id: "item_name",
-              type: "text",
-              name: "item_name",
-              value: "アイテム",
-              placeholder: "内容"
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-row" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c(
-            "label",
-            {
-              staticClass: "d-flex align-items-end",
-              attrs: { for: "description" }
-            },
-            [
-              _c("p", { staticClass: "font-weight-bold mb-0" }, [
-                _vm._v("商品の説明")
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "require-content" }, [
-                _c("p", { staticClass: "require font-weight-bold" }, [
-                  _vm._v("必須")
-                ])
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c("textarea", {
-            staticClass: "w-100 form-control",
-            attrs: {
-              id: "description",
-              name: "description",
-              rows: "10",
-              value: "Nike:テスト",
-              placeholder: "内容"
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-row" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c(
-            "label",
-            {
-              staticClass: "d-flex align-items-end",
-              attrs: { for: "category" }
-            },
-            [
-              _c("p", { staticClass: "font-weight-bold mb-0" }, [
-                _vm._v("カテゴリー")
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "require-content" }, [
-                _c("p", { staticClass: "require font-weight-bold" }, [
-                  _vm._v("必須")
-                ])
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              id: "category",
-              type: "text",
-              name: "category_id",
-              value: "カテゴリー01"
-            }
-          }),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              id: "category",
-              type: "text",
-              name: "category_child_id",
-              value: "カテゴリー02"
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-row" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c(
-            "label",
-            {
-              staticClass: "d-flex align-items-end",
-              attrs: { for: "brand_name" }
-            },
-            [
-              _c("p", { staticClass: "font-weight-bold mb-0" }, [
-                _vm._v("ブランド")
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "optional-content" }, [
-                _c("p", { staticClass: "optional font-weight-bold" }, [
-                  _vm._v("任意")
-                ])
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              id: "brand_name",
-              type: "text",
-              name: "brand_name",
-              value: "ブランド"
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-row" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c(
-            "label",
-            { staticClass: "d-flex align-items-end", attrs: { for: "size" } },
-            [
-              _c("p", { staticClass: "font-weight-bold mb-0" }, [
-                _vm._v("サイズ")
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "optional-content" }, [
-                _c("p", { staticClass: "optional font-weight-bold" }, [
-                  _vm._v("任意")
-                ])
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { id: "size", type: "text", name: "size", value: "サイズ" }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-row" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c(
-            "label",
-            {
-              staticClass: "d-flex align-items-end",
-              attrs: { for: "condition" }
-            },
-            [
-              _c("p", { staticClass: "font-weight-bold mb-0" }, [
-                _vm._v("商品の状態")
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "require-content" }, [
-                _c("p", { staticClass: "require font-weight-bold" }, [
-                  _vm._v("必須")
-                ])
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              id: "condition",
-              type: "text",
-              name: "condition",
-              value: "商品の状態",
-              placeholder: "商品の状態・内容"
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-row" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c(
-            "label",
-            {
-              staticClass: "d-flex align-items-end",
-              attrs: { for: "shipping_fee_payer" }
-            },
-            [
-              _c("p", { staticClass: "font-weight-bold mb-0" }, [
-                _vm._v("配送料の負担")
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "require-content" }, [
-                _c("p", { staticClass: "require font-weight-bold" }, [
-                  _vm._v("必須")
-                ])
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              id: "shipping_fee_payer",
-              type: "text",
-              name: "shipping_fee_payer",
-              value: "配送料",
-              placeholder: "配送料の負担"
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-row" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c(
-            "label",
-            {
-              staticClass: "d-flex align-items-end",
-              attrs: { for: "shipping_days" }
-            },
-            [
-              _c("p", { staticClass: "font-weight-bold mb-0" }, [
-                _vm._v("発送までの日数")
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "require-content" }, [
-                _c("p", { staticClass: "require font-weight-bold" }, [
-                  _vm._v("必須")
-                ])
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              id: "shipping_days",
-              type: "text",
-              name: "shipping_days",
-              value: "アイテム",
-              placeholder: "内容"
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-row" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c(
-            "label",
-            { staticClass: "d-flex align-items-end", attrs: { for: "price" } },
-            [
-              _c("p", { staticClass: "font-weight-bold mb-0" }, [
-                _vm._v("販売価格 (¥300〜¥9,999,999)")
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "require-content" }, [
-                _c("p", { staticClass: "require font-weight-bold" }, [
-                  _vm._v("必須")
-                ])
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              id: "price",
-              type: "text",
-              name: "price",
-              value: "アイテム",
-              placeholder: "内容"
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-row justify-content-center" }, [
-        _c(
-          "button",
-          { staticClass: "btn btn-primary btn-lg", attrs: { type: "submit" } },
-          [_vm._v("出品する")]
-        )
+          ]
+        ),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control",
+          attrs: {
+            id: "item_name",
+            type: "text",
+            name: "item_name",
+            value: "アイテム",
+            placeholder: "内容"
+          }
+        })
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-row" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c(
+          "label",
+          {
+            staticClass: "d-flex align-items-end",
+            attrs: { for: "description" }
+          },
+          [
+            _c("p", { staticClass: "font-weight-bold mb-0" }, [
+              _vm._v("商品の説明")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "require-content" }, [
+              _c("p", { staticClass: "require font-weight-bold" }, [
+                _vm._v("必須")
+              ])
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c("textarea", {
+          staticClass: "w-100 form-control",
+          attrs: {
+            id: "description",
+            name: "description",
+            rows: "10",
+            value: "Nike:テスト",
+            placeholder: "内容"
+          }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-row" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c(
+          "label",
+          { staticClass: "d-flex align-items-end", attrs: { for: "category" } },
+          [
+            _c("p", { staticClass: "font-weight-bold mb-0" }, [
+              _vm._v("カテゴリー")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "require-content" }, [
+              _c("p", { staticClass: "require font-weight-bold" }, [
+                _vm._v("必須")
+              ])
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control",
+          attrs: {
+            id: "category",
+            type: "text",
+            name: "category_id",
+            value: "カテゴリー01"
+          }
+        }),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control",
+          attrs: {
+            id: "category",
+            type: "text",
+            name: "category_child_id",
+            value: "カテゴリー02"
+          }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-row" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c(
+          "label",
+          {
+            staticClass: "d-flex align-items-end",
+            attrs: { for: "brand_name" }
+          },
+          [
+            _c("p", { staticClass: "font-weight-bold mb-0" }, [
+              _vm._v("ブランド")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "optional-content" }, [
+              _c("p", { staticClass: "optional font-weight-bold" }, [
+                _vm._v("任意")
+              ])
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control",
+          attrs: {
+            id: "brand_name",
+            type: "text",
+            name: "brand_name",
+            value: "ブランド"
+          }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-row" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c(
+          "label",
+          { staticClass: "d-flex align-items-end", attrs: { for: "size" } },
+          [
+            _c("p", { staticClass: "font-weight-bold mb-0" }, [
+              _vm._v("サイズ")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "optional-content" }, [
+              _c("p", { staticClass: "optional font-weight-bold" }, [
+                _vm._v("任意")
+              ])
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { id: "size", type: "text", name: "size", value: "サイズ" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-row" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c(
+          "label",
+          {
+            staticClass: "d-flex align-items-end",
+            attrs: { for: "condition" }
+          },
+          [
+            _c("p", { staticClass: "font-weight-bold mb-0" }, [
+              _vm._v("商品の状態")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "require-content" }, [
+              _c("p", { staticClass: "require font-weight-bold" }, [
+                _vm._v("必須")
+              ])
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control",
+          attrs: {
+            id: "condition",
+            type: "text",
+            name: "condition",
+            value: "商品の状態",
+            placeholder: "商品の状態・内容"
+          }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-row" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c(
+          "label",
+          {
+            staticClass: "d-flex align-items-end",
+            attrs: { for: "shipping_fee_payer" }
+          },
+          [
+            _c("p", { staticClass: "font-weight-bold mb-0" }, [
+              _vm._v("配送料の負担")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "require-content" }, [
+              _c("p", { staticClass: "require font-weight-bold" }, [
+                _vm._v("必須")
+              ])
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control",
+          attrs: {
+            id: "shipping_fee_payer",
+            type: "text",
+            name: "shipping_fee_payer",
+            value: "配送料",
+            placeholder: "配送料の負担"
+          }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-row" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c(
+          "label",
+          {
+            staticClass: "d-flex align-items-end",
+            attrs: { for: "shipping_days" }
+          },
+          [
+            _c("p", { staticClass: "font-weight-bold mb-0" }, [
+              _vm._v("発送までの日数")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "require-content" }, [
+              _c("p", { staticClass: "require font-weight-bold" }, [
+                _vm._v("必須")
+              ])
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control",
+          attrs: {
+            id: "shipping_days",
+            type: "text",
+            name: "shipping_days",
+            value: "アイテム",
+            placeholder: "内容"
+          }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-row" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c(
+          "label",
+          { staticClass: "d-flex align-items-end", attrs: { for: "price" } },
+          [
+            _c("p", { staticClass: "font-weight-bold mb-0" }, [
+              _vm._v("販売価格 (¥300〜¥9,999,999)")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "require-content" }, [
+              _c("p", { staticClass: "require font-weight-bold" }, [
+                _vm._v("必須")
+              ])
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control",
+          attrs: {
+            id: "price",
+            type: "text",
+            name: "price",
+            value: "アイテム",
+            placeholder: "内容"
+          }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-row justify-content-center" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-primary btn-lg", attrs: { type: "submit" } },
+        [_vm._v("出品する")]
+      )
     ])
   }
 ]
