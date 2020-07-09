@@ -1,8 +1,8 @@
 <template>
     <div class="form-container">
+    <!-- ---画像アップロード--- -->
         <div class="form-row">
             <div class="form-group">
-
                     <label for="image-uploader">
                         <div class="d-flex align-items-end mb-0">
                             <p class="mb-0 h6 font-weight-bold">商品画像</p>
@@ -12,7 +12,6 @@
                         </div>
                         <p class="mb-0 block">最大8枚までアップロードできます</p>
                     </label>
-
                     <div id="image-uploader" class="card-body pt-1 px-5 mb-3">
                         <label for="uploader-btn" class="drag-drop-content d d-flex align-items-center justify-content-center"
                         @dragenter="dragEnter"
@@ -40,8 +39,7 @@
                     </div>
             </div>
         </div>
-
-
+    <!-- ---商品名--- -->
         <div class="form-row">  
             <div class="form-group">
                 <label for="item_name" class="d-flex align-items-end">
@@ -53,8 +51,7 @@
                 <input id="item_name" type="text" class="form-control" name="item_name" value="アイテム" placeholder="内容">
             </div>
         </div>
-
-
+    <!-- ---商品の説明--- -->
         <div class="form-row">  
             <div class="form-group">
                 <label for="description" class="d-flex align-items-end">
@@ -66,21 +63,9 @@
                 <textarea  id="description" name="description" class="w-100 form-control" rows="10" value="Nike:テスト" placeholder="内容"></textarea>
             </div>
         </div>
-
-
-        <div class="form-row">  
-            <div class="form-group">
-                <label for="category" class="d-flex align-items-end">
-                    <p class="font-weight-bold mb-0">カテゴリー</p>
-                    <div class="require-content">
-                        <p class="require font-weight-bold">必須</p>
-                    </div>
-                </label>
-                <input id="category" type="text" class="form-control" name="category_id" value="カテゴリー01">
-                <input id="category" type="text" class="form-control" name="category_child_id" value="カテゴリー02">
-            </div>
-        </div>
-
+    <!-- ---カテゴリー --- -->
+        <CategoryComponent></CategoryComponent>
+    <!-- ---ブランド--- -->
         <div class="form-row">  
             <div class="form-group">
                 <label for="brand_name" class="d-flex align-items-end">
@@ -92,8 +77,7 @@
                 <input id="brand_name" type="text" class="form-control" name="brand_name" value="ブランド">
             </div>
         </div>
-
-
+    <!-- ---サイズ--- -->
         <div class="form-row">  
             <div class="form-group">
                 <label for="size" class="d-flex align-items-end">
@@ -105,7 +89,7 @@
                 <input id="size" type="text" class="form-control" name="size" value="サイズ">
             </div>
         </div>
-
+    <!-- ---商品の状態--- -->
         <div class="form-row">  
             <div class="form-group">
                 <label for="condition" class="d-flex align-items-end">
@@ -117,7 +101,7 @@
                 <input id="condition" type="text" class="form-control" name="condition" value="商品の状態" placeholder="商品の状態・内容">
             </div>
         </div>
-
+    <!-- ---配送料の負担--- -->
         <div class="form-row">  
             <div class="form-group">
                 <label for="shipping_fee_payer" class="d-flex align-items-end">
@@ -129,7 +113,7 @@
                 <input id="shipping_fee_payer" type="text" class="form-control" name="shipping_fee_payer" value="配送料" placeholder="配送料の負担">
             </div>
         </div>
-
+    <!-- ---発送までの日数--- -->
         <div class="form-row">  
             <div class="form-group">
                 <label for="shipping_days" class="d-flex align-items-end">
@@ -141,7 +125,7 @@
                 <input id="shipping_days" type="text" class="form-control" name="shipping_days" value="アイテム" placeholder="内容">
             </div>
         </div>
-
+    <!-- ---販売価格--- -->
         <div class="form-row">  
             <div class="form-group">
                 <label for="price" class="d-flex align-items-end">
@@ -161,7 +145,11 @@
 </template>
 
 <script>
+import CategoryComponent from './CategoryComponent'
 export default {
+    components: {
+        CategoryComponent
+    },
     data() {
         return {
             isDrag: false,
@@ -227,6 +215,8 @@ export default {
             this.images.splice(index, 1)
             this.files.splice(index, 1)
         },
+
+
     },
 
 
