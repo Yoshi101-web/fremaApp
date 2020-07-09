@@ -2191,6 +2191,19 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       this.files.splice(index, 1);
     }
   },
+  //     fileUpload() {
+  //     this.files.forEach(file => {
+  //         var form = new FormData()
+  //         form.append('file', file)
+  //         axios.post('/api/fileupload', form)
+  //         .then(response => {
+  //             console.log(error)
+  //         })
+  //         .catch(error => {
+  //             console.log(error)
+  //         })
+  //     })
+  // },
   mounted: function mounted() {
     window.ondrop = function (e) {
       e.preventDefault();
