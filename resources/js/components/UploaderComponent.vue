@@ -98,7 +98,14 @@
                         <p class="require font-weight-bold">必須</p>
                     </div>
                 </label>
-                <input id="condition" type="text" class="form-control" name="condition" value="商品の状態" placeholder="商品の状態・内容">
+                <select id="condition" name="condition" class="form-control">
+                    <option value="">選択してください</option>
+                    <option value="新品、未使用">新品、未使用</option>
+                    <option value="未使用に近い">未使用に近い</option>
+                    <option value="目立った傷や汚れなし">目立った傷や汚れなし</option>
+                    <option value="やや傷や汚れあり">やや傷や汚れあり</option>
+                    <option value="全体的に状態が悪い">全体的に状態が悪い</option>
+                </select>
             </div>
         </div>
     <!-- ---配送料の負担--- -->
@@ -110,7 +117,11 @@
                         <p class="require font-weight-bold">必須</p>
                     </div>
                 </label>
-                <input id="shipping_fee_payer" type="text" class="form-control" name="shipping_fee_payer" value="配送料" placeholder="配送料の負担">
+                <select id="shipping_fee_payer" name="shipping_fee_payer" class="form-control">
+                    <option value="">選択してください</option>
+                    <option value="送料込み（出品者負担）">送料込み（出品者負担）</option>
+                    <option value="着払い（購入者負担）">着払い（購入者負担）</option>
+                </select>
             </div>
         </div>
     <!-- ---発送までの日数--- -->
@@ -122,19 +133,26 @@
                         <p class="require font-weight-bold">必須</p>
                     </div>
                 </label>
-                <input id="shipping_days" type="text" class="form-control" name="shipping_days" value="アイテム" placeholder="内容">
+                <select id="shipping_days" name="shipping_days" class="form-control">
+                    <option value="">選択してください</option>
+                    <option value="１〜２日で発送">１〜２日で発送</option>
+                    <option value="２〜３日で発送">２〜３日で発送</option>
+                    <option value="４〜７日で発送">４〜７日で発送</option>
+                </select>
             </div>
         </div>
     <!-- ---販売価格--- -->
         <div class="form-row">  
-            <div class="form-group mt-2">
-                <label for="price" class="d-flex align-items-end">
+            <div class="form-group mt-2 d-flex justify-content-between">
+                <label for="price" class="d-flex align-items-center">
                     <p class="font-weight-bold mb-0">販売価格 (¥300〜¥9,999,999)</p>
                     <div class="require-content">
                         <p class="require font-weight-bold">必須</p>
                     </div>
                 </label>
-                <input id="price" type="text" class="form-control" name="price" value="アイテム" placeholder="内容">
+                <p class="d-flex align-items-center"><span class="mr-1">¥</span><input type="number" id="price" name="price" class="form-control text-right
+                " placeholder="0"></p>
+                
             </div>
         </div>
         

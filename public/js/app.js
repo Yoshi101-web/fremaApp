@@ -6462,6 +6462,24 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -43415,16 +43433,38 @@ var staticRenderFns = [
           ]
         ),
         _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            id: "condition",
-            type: "text",
-            name: "condition",
-            value: "商品の状態",
-            placeholder: "商品の状態・内容"
-          }
-        })
+        _c(
+          "select",
+          {
+            staticClass: "form-control",
+            attrs: { id: "condition", name: "condition" }
+          },
+          [
+            _c("option", { attrs: { value: "" } }, [
+              _vm._v("選択してください")
+            ]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "新品、未使用" } }, [
+              _vm._v("新品、未使用")
+            ]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "未使用に近い" } }, [
+              _vm._v("未使用に近い")
+            ]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "目立った傷や汚れなし" } }, [
+              _vm._v("目立った傷や汚れなし")
+            ]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "やや傷や汚れあり" } }, [
+              _vm._v("やや傷や汚れあり")
+            ]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "全体的に状態が悪い" } }, [
+              _vm._v("全体的に状態が悪い")
+            ])
+          ]
+        )
       ])
     ])
   },
@@ -43453,16 +43493,26 @@ var staticRenderFns = [
           ]
         ),
         _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            id: "shipping_fee_payer",
-            type: "text",
-            name: "shipping_fee_payer",
-            value: "配送料",
-            placeholder: "配送料の負担"
-          }
-        })
+        _c(
+          "select",
+          {
+            staticClass: "form-control",
+            attrs: { id: "shipping_fee_payer", name: "shipping_fee_payer" }
+          },
+          [
+            _c("option", { attrs: { value: "" } }, [
+              _vm._v("選択してください")
+            ]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "送料込み（出品者負担）" } }, [
+              _vm._v("送料込み（出品者負担）")
+            ]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "着払い（購入者負担）" } }, [
+              _vm._v("着払い（購入者負担）")
+            ])
+          ]
+        )
       ])
     ])
   },
@@ -43491,16 +43541,30 @@ var staticRenderFns = [
           ]
         ),
         _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            id: "shipping_days",
-            type: "text",
-            name: "shipping_days",
-            value: "アイテム",
-            placeholder: "内容"
-          }
-        })
+        _c(
+          "select",
+          {
+            staticClass: "form-control",
+            attrs: { id: "shipping_days", name: "shipping_days" }
+          },
+          [
+            _c("option", { attrs: { value: "" } }, [
+              _vm._v("選択してください")
+            ]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "１〜２日で発送" } }, [
+              _vm._v("１〜２日で発送")
+            ]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "２〜３日で発送" } }, [
+              _vm._v("２〜３日で発送")
+            ]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "４〜７日で発送" } }, [
+              _vm._v("４〜７日で発送")
+            ])
+          ]
+        )
       ])
     ])
   },
@@ -43509,34 +43573,43 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form-row" }, [
-      _c("div", { staticClass: "form-group mt-2" }, [
-        _c(
-          "label",
-          { staticClass: "d-flex align-items-end", attrs: { for: "price" } },
-          [
-            _c("p", { staticClass: "font-weight-bold mb-0" }, [
-              _vm._v("販売価格 (¥300〜¥9,999,999)")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "require-content" }, [
-              _c("p", { staticClass: "require font-weight-bold" }, [
-                _vm._v("必須")
+      _c(
+        "div",
+        { staticClass: "form-group mt-2 d-flex justify-content-between" },
+        [
+          _c(
+            "label",
+            {
+              staticClass: "d-flex align-items-center",
+              attrs: { for: "price" }
+            },
+            [
+              _c("p", { staticClass: "font-weight-bold mb-0" }, [
+                _vm._v("販売価格 (¥300〜¥9,999,999)")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "require-content" }, [
+                _c("p", { staticClass: "require font-weight-bold" }, [
+                  _vm._v("必須")
+                ])
               ])
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            id: "price",
-            type: "text",
-            name: "price",
-            value: "アイテム",
-            placeholder: "内容"
-          }
-        })
-      ])
+            ]
+          ),
+          _vm._v(" "),
+          _c("p", { staticClass: "d-flex align-items-center" }, [
+            _c("span", { staticClass: "mr-1" }, [_vm._v("¥")]),
+            _c("input", {
+              staticClass: "form-control text-right\n            ",
+              attrs: {
+                type: "number",
+                id: "price",
+                name: "price",
+                placeholder: "0"
+              }
+            })
+          ])
+        ]
+      )
     ])
   },
   function() {
