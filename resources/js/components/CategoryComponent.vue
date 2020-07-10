@@ -10,6 +10,7 @@
                     </div>
                 </label>
             </li>
+        <!-- -カテゴリー親 - -->
             <li class="select-box">
                 <select id="category" name="category_id" required class="form-control" v-model="Category" @change="fetchChild">
                     <option value="">選択してください</option>
@@ -18,18 +19,18 @@
                     </option>
                 </select>
             </li>
-        <!-- -カテゴリー親 - -->
+        <!-- -カテゴリー子 - -->
             <li class="select-box">
-                <select id="category" name="category-children" required class="form-control" v-show="showChildren" v-model="CategoryChildren" @change="fetchGrandChild">
+                <select id="category" name="category_children_id" required class="form-control" v-show="showChildren" v-model="CategoryChildren" @change="fetchGrandChild">
                     <option value="">選択してください</option>
                     <option v-for="(child, index) in children" v-bind:value="child.id" :key="index">
                         {{ child.name }}
                     </option>
                 </select>
             </li>
-        <!-- -カテゴリー親 - -->
+        <!-- -カテゴリー孫 - -->
             <li class="select-box">
-                <select id="category" name="category-grand-children" class="form-control" v-show="showGrandChildren"  v-model="CategoryGrandChildren">
+                <select id="category" name="category_grand_children_id" class="form-control" v-show="showGrandChildren"  v-model="CategoryGrandChildren">
                     <option value="">選択してください</option>
                     <option v-for="(grandChild, index) in grandChildren" v-bind:value="grandChild.id" :key="index">
                         {{ grandChild.name }}
