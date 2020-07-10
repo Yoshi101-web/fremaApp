@@ -124,6 +124,8 @@
                 </select>
             </div>
         </div>
+    <!-- ---配送元の地域--- -->
+        <PrefectureComponent></PrefectureComponent>
     <!-- ---発送までの日数--- -->
         <div class="form-row">  
             <div class="form-group mt-2">
@@ -155,7 +157,6 @@
                 
             </div>
         </div>
-        
         <div class="form-row justify-content-center">  
             <button type="submit" class="btn btn-primary btn-lg">出品する</button>
         </div>
@@ -164,9 +165,11 @@
 
 <script>
 import CategoryComponent from './CategoryComponent'
+import PrefectureComponent from './PrefectureComponent'
 export default {
     components: {
-        CategoryComponent
+        CategoryComponent,
+        PrefectureComponent
     },
     data() {
         return {
