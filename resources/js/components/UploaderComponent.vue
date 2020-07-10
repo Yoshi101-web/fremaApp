@@ -53,7 +53,7 @@
         </div>
     <!-- ---商品の説明--- -->
         <div class="form-row">  
-            <div class="form-group">
+            <div class="form-group mt-2">
                 <label for="description" class="d-flex align-items-end">
                     <p class="font-weight-bold mb-0">商品の説明</p>
                     <div class="require-content">
@@ -67,7 +67,7 @@
         <CategoryComponent></CategoryComponent>
     <!-- ---ブランド--- -->
         <div class="form-row">  
-            <div class="form-group">
+            <div class="form-group mt-2">
                 <label for="brand_name" class="d-flex align-items-end">
                     <p class="font-weight-bold mb-0">ブランド</p>
                     <div class="optional-content">
@@ -79,7 +79,7 @@
         </div>
     <!-- ---サイズ--- -->
         <div class="form-row">  
-            <div class="form-group">
+            <div class="form-group mt-2">
                 <label for="size" class="d-flex align-items-end">
                     <p class="font-weight-bold mb-0">サイズ</p>
                     <div class="optional-content">
@@ -91,7 +91,7 @@
         </div>
     <!-- ---商品の状態--- -->
         <div class="form-row">  
-            <div class="form-group">
+            <div class="form-group mt-2">
                 <label for="condition" class="d-flex align-items-end">
                     <p class="font-weight-bold mb-0">商品の状態</p>
                     <div class="require-content">
@@ -103,7 +103,7 @@
         </div>
     <!-- ---配送料の負担--- -->
         <div class="form-row">  
-            <div class="form-group">
+            <div class="form-group mt-2">
                 <label for="shipping_fee_payer" class="d-flex align-items-end">
                     <p class="font-weight-bold mb-0">配送料の負担</p>
                     <div class="require-content">
@@ -115,7 +115,7 @@
         </div>
     <!-- ---発送までの日数--- -->
         <div class="form-row">  
-            <div class="form-group">
+            <div class="form-group mt-2">
                 <label for="shipping_days" class="d-flex align-items-end">
                     <p class="font-weight-bold mb-0">発送までの日数</p>
                     <div class="require-content">
@@ -127,7 +127,7 @@
         </div>
     <!-- ---販売価格--- -->
         <div class="form-row">  
-            <div class="form-group">
+            <div class="form-group mt-2">
                 <label for="price" class="d-flex align-items-end">
                     <p class="font-weight-bold mb-0">販売価格 (¥300〜¥9,999,999)</p>
                     <div class="require-content">
