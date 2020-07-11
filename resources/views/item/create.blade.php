@@ -17,7 +17,7 @@
                     <p class="text-center font-weight-bold h1 mb-0 py-3">出品</p>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('item.store') }}">
+                    <form method="POST" action="{{ route('item.store') }}" enctype="multipart/form-data">
                         @csrf
                         <uploader-component></uploader-component>
                         
