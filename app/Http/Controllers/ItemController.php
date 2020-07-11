@@ -52,18 +52,19 @@ class ItemController extends Controller
     public function store(Request $request, Item $item)
     {
         $item->item_name = $request->item_name;
+        $item->description = $request->description;
         $item->user_id = Auth::user()->id;
         $item->category_id = $request->category_id;
         $item->category_children_id = $request->category_children_id;
         $item->category_grand_children_id = $request->category_grand_children_id;
         $item->brand_name = $request->brand_name;
-        $item->description = $request->description;
         $item->price = $request->price;
         $item->size = $request->size;
         $item->condition = $request->condition;
         $item->shipping_fee_payer = $request->shipping_fee_payer;
         $item->prefecture_id = $request->prefecture_id;
-        $item->save;
+        $item->shipping_days = $request->shipping_days;
+        $item->save();
     }
 
     /**

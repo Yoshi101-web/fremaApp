@@ -16,12 +16,13 @@ class CreateItemsTable extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('item_name');
+            $table->longText('description');
             $table->bigInteger('user_id')->unsigned(); //MySQLで整数カラムを符号なしに設定
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('category_id');
-            $table->integer('category_child_id');
+            $table->integer('category_children_id');
+            $table->integer('category_grand_children_id');
             $table->string('brand_name')->nullable();
-            $table->longText('description');
             $table->string('price');
             $table->string('size')->nullable();
             $table->string('condition');
@@ -33,6 +34,7 @@ class CreateItemsTable extends Migration
             //timestamps ()関数は、作成した両方のカラムに対してデフォルト値00 - 00 00 00 00を行います
         });
     }
+
 
     /**
      * Reverse the migrations.
