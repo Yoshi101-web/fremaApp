@@ -65,6 +65,7 @@ class ItemController extends Controller
         $item->prefecture_id = $request->prefecture_id;
         $item->shipping_days = $request->shipping_days;
         $item->save();
+        return redirect()->route('item.index');
     }
 
     /**
