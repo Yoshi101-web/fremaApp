@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Auth;
 use Validator;
 use App\Item;
+use App\Image;
 use Illuminate\Http\Request;
-
+use Illuminate\Http\UploadedFile;
 
 class ItemController extends Controller
 {
@@ -49,8 +51,26 @@ class ItemController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Item $item)
+    public function store(Request $request, Item $item, Image $image)
     {
+        $latest = $item->orderBy('created_at', 'DESC')->first();
+        // $item_id = 1+$latest->id;
+        $item_id = 1+$latest->id;
+        $images=array();
+        $files = $request->file('files');
+        foreach($files as $file) {
+            $file_name = $file->getClientOriginalName();
+            $path = $file->storeAs('images',$file_name);
+            // $item->images->create(['image' => $path]);
+
+            $item->images()->create(['image' => $path,'item_id' => $item_id]);
+            // $data = (['image' => $path,'item_id' => $item_id]);
+
+            // $data = (['image' => $path, 'item_id' => Auth::user()->id]);
+            // $images[]=$data;
+        }
+        // Image::insert($images);
+        // $item->images()->createMany($images);
         $item->item_name = $request->item_name;
         $item->description = $request->description;
         $item->user_id = Auth::user()->id;

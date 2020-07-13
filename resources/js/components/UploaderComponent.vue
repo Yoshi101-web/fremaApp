@@ -23,7 +23,7 @@
                             <div class="dd-text-group">
                                 <p class="mb-0 text-center user-select-none">ドラッグアンドドロップ</p>
                                 <p class="mb-0 text-center user-select-none">またはクリックしてファイルをアップロード</p>
-                                <input id="uploader-btn" type="file" multiple="multiple" v-on:change="fileSelected" style="display: none;" >
+                                <input id="uploader-btn" name="files[]" type="file" multiple v-on:change="fileSelected" style="display: none;" >
                             </div>
                         </label>
                     </div>
@@ -204,7 +204,6 @@ export default {
         fileSelected() {
             var fileList = event.target.files || event.dataTransfer.files
             this.fileForeach(fileList)
-            console.log('fileSelected');
             for(var i=0; i<fileList.length; i++){
                 this.files.push(fileList[i])
             }
@@ -238,27 +237,21 @@ export default {
         },
 
 
+        // fileUpload() {
+        //     this.files.forEach(file => {
+        //         var form = new FormData()
+        //         form.append('file', file)
+        //         axios.post('/api/fileupload', form)
+        //         .then(response => {
+        //             console.log(response)
+        //             console.log('good!')
+        //         })
+        //         .catch(error => {
+        //             console.log(error)
+        //         })
+        //     })
+        // },
     },
-
-
-
-//     fileUpload() {
-//     this.files.forEach(file => {
-//         var form = new FormData()
-//         form.append('file', file)
-//         axios.post('/api/fileupload', form)
-//         .then(response => {
-//             console.log(error)
-//         })
-//         .catch(error => {
-//             console.log(error)
-//         })
-//     })
-// },
-
-
-
-
     mounted() {
         window.ondrop = function(e) {
             e.preventDefault()

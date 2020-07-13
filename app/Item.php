@@ -8,9 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model
 {
+    // protected $fillable = ['image', 'item_id'];
+
     public function user()
     {
-        return $this->BelongsTo('App\User','user_id', 'id');
+        return $this->BelongsTo('App\User');
     }
 
     public function images()

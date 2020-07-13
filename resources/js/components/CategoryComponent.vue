@@ -12,7 +12,7 @@
             </li>
         <!-- -カテゴリー親 - -->
             <li class="select-box">
-                <select id="category" name="category_id" required class="form-control" v-model="Category" @change="fetchChild">
+                <select id="category" name="category_id" class="form-control" v-model="Category" @change="fetchChild">
                     <option value="">選択してください</option>
                     <option v-for="(category, index) in categories" :value="category.id" :key="index">
                         {{ category.name }}
@@ -21,7 +21,7 @@
             </li>
         <!-- -カテゴリー子 - -->
             <li class="select-box">
-                <select id="category" name="category_children_id" required class="form-control" v-show="showChildren" v-model="CategoryChildren" @change="fetchGrandChild">
+                <select id="category" name="category_children_id" class="form-control" v-show="showChildren" v-model="CategoryChildren" @change="fetchGrandChild">
                     <option value="">選択してください</option>
                     <option v-for="(child, index) in children" v-bind:value="child.id" :key="index">
                         {{ child.name }}
