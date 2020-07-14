@@ -11,8 +11,9 @@ $factory->define(App\Item::class, function (Faker $faker) {
         'user_id' => function() {
             return factory(App\User::class)->create()->id;
         },
-        'category_id' => $faker->numberBetween(1, 10),
-        'category_child_id' => $faker->numberBetween(101, 300),
+        'category_id' => $faker->numberBetween(1, 13),
+        'category_children_id' => $faker->numberBetween(101, 119),
+        'category_grand_children_id' => $faker->numberBetween(10101, 10118),
         'brand_name'=> $faker->word,
         'description' => $faker->realText(200),
         'price'=> $faker->numberBetween(301, 10000),

@@ -16,3 +16,11 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('fileupload',function(){
+
+	$file_name = request()->file->getClientOriginalName();
+
+	request()->file->storeAs('public/images',$file_name);
+
+});

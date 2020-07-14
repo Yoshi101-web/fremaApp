@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Auth;
 use Validator;
 use App\Item;
+use App\Image;
 use Illuminate\Http\Request;
-
+use Illuminate\Http\UploadedFile;
 
 class ItemController extends Controller
 {
@@ -49,9 +51,35 @@ class ItemController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Item $item)
     {
-        //
+        $latest = $item->orderBy('created_at', 'DESC')->first(); //最新のitemを取得
+        $item_id = 1+$latest->id; ////最新のitemのidに１プラス。
+        $images=array();  //からの配列を用意
+
+        $files = $request->file('files'); //files[]を取得(複数)
+        foreach($files as $file) {
+            $file_name = $file->getClientOriginalName();
+            $path = $file->storeAs('public/images',$file_name);
+            $data = (['image' => $path,'item_id' => $item_id]);
+            $images[]=$data;
+        }
+        $item->item_name = $request->item_name;
+        $item->description = $request->description;
+        $item->user_id = Auth::user()->id;
+        $item->category_id = $request->category_id;
+        $item->category_children_id = $request->category_children_id;
+        $item->category_grand_children_id = $request->category_grand_children_id;
+        $item->brand_name = $request->brand_name;
+        $item->price = $request->price;
+        $item->size = $request->size;
+        $item->condition = $request->condition;
+        $item->shipping_fee_payer = $request->shipping_fee_payer;
+        $item->prefecture_id = $request->prefecture_id;
+        $item->shipping_days = $request->shipping_days;
+        $item->save();
+        Image::insert($images); //imageテーブルにinsert
+        return redirect()->route('item.index');
     }
 
     /**
