@@ -64,7 +64,6 @@ class ItemController extends Controller
             $data = (['image' => $path,'item_id' => $item_id]);
             $images[]=$data;
         }
-        
         $item->item_name = $request->item_name;
         $item->description = $request->description;
         $item->user_id = Auth::user()->id;

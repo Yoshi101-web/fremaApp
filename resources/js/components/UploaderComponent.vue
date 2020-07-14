@@ -17,13 +17,13 @@
                         @dragenter="dragEnter"
                         @dragleave="dragLeave"
                         @dragover.prevent
-                        @drop.prevent="dropFile"
+                        @drop.prevent="dropAndSelectedFile"
                         :class="{drag: isDrag}"
                         >
                             <div class="dd-text-group">
                                 <p class="mb-0 text-center user-select-none">ドラッグアンドドロップ</p>
                                 <p class="mb-0 text-center user-select-none">またはクリックしてファイルをアップロード</p>
-                                <input id="uploader-btn" name="files[]" type="file" multiple v-on:change="fileSelected" style="display: none;" >
+                                <input id="uploader-btn" name="files[]" type="file" multiple v-on:change="dropAndSelectedFile" style="display: none;" >
                             </div>
                         </label>
                     </div>
@@ -157,8 +157,8 @@
                 
             </div>
         </div>
-        <div class="form-row justify-content-center">  
-            <button type="submit" class="btn btn-primary btn-lg">出品する</button>
+        <div class="form-row justify-content-center">
+            <button @click="filesUpload" type="submit" class="btn btn-primary btn-lg">出品する</button>
         </div>
     </div>
 </template>
@@ -175,7 +175,6 @@ export default {
         return {
             isDrag: false,
             images: [],
-            files: []
         }
     },
     methods: {
@@ -191,22 +190,16 @@ export default {
             this.isDrag = true;
             console.log('dragOver');
         },
-
-        dropFile() {
-            var fileList = [...event.dataTransfer.files];
+        dropAndSelectedFile() {
+            //event.target.filesは、type=fileのボタンを押してアップロードされた画像。
+            //event.dataTransfer.filesは、ドラッグ＆ドロップでインポートした画像。
+            var fileList = event.target.files || event.dataTransfer.files //どっちでも大丈夫。
             this.fileForeach(fileList)
             for(var i=0; i<fileList.length; i++){
-                this.files.push(fileList[i])
+                this.DataTransfer.items.add(fileList[i]); //fileをDataTransferに代入。
             }
             this.isDrag = false;
-        },
-        
-        fileSelected() {
-            var fileList = event.target.files || event.dataTransfer.files
-            this.fileForeach(fileList)
-            for(var i=0; i<fileList.length; i++){
-                this.files.push(fileList[i])
-            }
+            console.log(this.DataTransfer);
         },
         fileForeach(fileList) {
             if (!fileList.length) {
@@ -226,31 +219,19 @@ export default {
                 var dataURI = e.target.result
                 if (dataURI) {
                     this.images.push({name: image.name, size: image.size, type: image.type, path: dataURI})
-                // this.$emit('upload-success', formData, this.images.length - 1, this.images)
                 }
             }
             reader.readAsDataURL(image)
         },
         deleteFile(index) {
-            this.images.splice(index, 1)
-            this.files.splice(index, 1)
+            this.images.splice(index, 1) //サムネール削除
+            this.DataTransfer.items.remove(index) //画像削除
         },
-
-
-        // fileUpload() {
-        //     this.files.forEach(file => {
-        //         var form = new FormData()
-        //         form.append('file', file)
-        //         axios.post('/api/fileupload', form)
-        //         .then(response => {
-        //             console.log(response)
-        //             console.log('good!')
-        //         })
-        //         .catch(error => {
-        //             console.log(error)
-        //         })
-        //     })
-        // },
+        filesUpload() {
+             var input = document.querySelectorAll('input[name="files[]"]'); //input[name="files[]"を取得
+            //inputにDataTransfer.files（fileList）を代入。  input[0].filesは、FileListオブジェクトしか代入できない
+            input[0].files = this.DataTransfer.files; 
+        }
     },
     mounted() {
         window.ondrop = function(e) {
@@ -260,6 +241,11 @@ export default {
             e.preventDefault();
         }
         console.log('Component mounted.')
+
+        // 画像をデータを持つためのオブジェクト
+        //DataTransfer.filesにFileListを持っている。
+        this.DataTransfer = new DataTransfer() 
+        console.log(this.DataTransfer)
     }
 }
 </script>
