@@ -17,12 +17,12 @@
                     <p class="text-center font-weight-bold h1 mb-0 py-3">出品</p>
                 </div>
                 <div class="card-body">
-                @if(count($errors) > 0)
+                @if($errors->any())
                 <!-- Form Error List --> 
                 <div class="alert alert-danger">
                     <ul>
-                        @foreach ($error->all() as $error)
-                            <li>{{ error }}</li>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
                         @endforeach
                     </ul>
                 </div>
