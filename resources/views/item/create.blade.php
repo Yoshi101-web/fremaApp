@@ -31,7 +31,9 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('item.store') }}" enctype="multipart/form-data">
                         @csrf
-                        <uploader-component></uploader-component>
+                        <uploader-component 
+                        :old="{{ json_encode(Session::getOldInput()) }}"
+                        ></uploader-component>
                         
                     </form>
                 </div>

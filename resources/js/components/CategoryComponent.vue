@@ -21,7 +21,7 @@
             </li>
         <!-- -カテゴリー子 - -->
             <li class="select-box">
-                <select id="category" name="category_children_id" class="form-control" v-show="showChildren" v-model="CategoryChildren" @change="fetchGrandChild">
+                <select id="category" name="category_children_id" class="form-control" v-show="showChildren" v-model="CategoryChildren" @change="fetchGrandChild" placeholder="選択してください">
                     <option value="">選択してください</option>
                     <option v-for="(child, index) in children" v-bind:value="child.id" :key="index">
                         {{ child.name }}
@@ -43,8 +43,16 @@
 
 <script>
 export default {
+        props: [
+            'category_id',
+            'category_children_id',
+            'category_grand_children_id'
+        ],
     data() {
         return {
+            // category_id: this.old.category_id,
+            // category_children_id: this.old.category_children_id,
+            // category_grand_children_id: this.old.category_grand_children_id,
             showChildren: false,
             showGrandChildren: false,
             Category: '',
@@ -1824,6 +1832,24 @@ export default {
             }
             this.grandChildren = tmp_grandChildren;
             this.showGrandChildren=true;
+        }
+    },
+    mounted() {
+        if (this.category_id != null){
+            this.Category = this.category_id
+            this.fetchChild()
+            this.showChildren = true
+
+            if (this.category_id && this.category_children_id != null) {
+                this.CategoryChildren = this.category_children_id
+                this.fetchGrandChild()
+                this.showGrandChildren = true
+                
+                if(this.category_id && this.category_children_id && this.category_grand_children_id != null) {
+                this.CategoryGrandChildren = this.category_grand_children_id
+
+                }
+            }
         }
     }
 }

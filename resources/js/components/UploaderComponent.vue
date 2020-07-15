@@ -23,7 +23,7 @@
                             <div class="dd-text-group">
                                 <p class="mb-0 text-center user-select-none">ドラッグアンドドロップ</p>
                                 <p class="mb-0 text-center user-select-none">またはクリックしてファイルをアップロード</p>
-                                <input id="uploader-btn" name="files[]" type="file" multiple v-on:change="dropAndSelectedFile" style="display: none;" >
+                                <input id="uploader-btn" name="files[]" type="file" multiple @change="dropAndSelectedFile" style="display: none;" >
                             </div>
                         </label>
                     </div>
@@ -48,7 +48,7 @@
                         <p class="require font-weight-bold">必須</p>
                     </div>
                 </label>
-                <input id="item_name" type="text" class="form-control" name="item_name" value="アイテム" placeholder="内容">
+                <input id="item_name" type="text" class="form-control" name="item_name" v-model="item_name" placeholder="内容">
             </div>
         </div>
     <!-- ---商品の説明--- -->
@@ -60,11 +60,15 @@
                         <p class="require font-weight-bold">必須</p>
                     </div>
                 </label>
-                <textarea  id="description" name="description" class="w-100 form-control" rows="10" value="Nike:テスト" placeholder="内容"></textarea>
+                <textarea  id="description" name="description" v-model="description" class="w-100 form-control" rows="10" placeholder="商品の説明 :"></textarea>
             </div>
         </div>
     <!-- ---カテゴリー --- -->
-        <CategoryComponent></CategoryComponent>
+        <CategoryComponent
+        :category_id="category_id"
+        :category_children_id="category_children_id"
+        :category_grand_children_id="category_grand_children_id"
+        ></CategoryComponent>
     <!-- ---ブランド--- -->
         <div class="form-row">  
             <div class="form-group mt-2">
@@ -74,7 +78,7 @@
                         <p class="optional font-weight-bold">任意</p>
                     </div>
                 </label>
-                <input id="brand_name" type="text" class="form-control" name="brand_name" value="ブランド">
+                <input id="brand_name" type="text" class="form-control" name="brand_name" v-model="brand_name" placeholder="ブランド">
             </div>
         </div>
     <!-- ---サイズ--- -->
@@ -86,7 +90,7 @@
                         <p class="optional font-weight-bold">任意</p>
                     </div>
                 </label>
-                <input id="size" type="text" class="form-control" name="size" value="サイズ">
+                <input id="size" type="text" class="form-control" name="size" v-model="size">
             </div>
         </div>
     <!-- ---商品の状態--- -->
@@ -98,7 +102,7 @@
                         <p class="require font-weight-bold">必須</p>
                     </div>
                 </label>
-                <select id="condition" name="condition" class="form-control">
+                <select id="condition" name="condition" v-model="condition" class="form-control">
                     <option value="">選択してください</option>
                     <option value="新品、未使用">新品、未使用</option>
                     <option value="未使用に近い">未使用に近い</option>
@@ -117,7 +121,7 @@
                         <p class="require font-weight-bold">必須</p>
                     </div>
                 </label>
-                <select id="shipping_fee_payer" name="shipping_fee_payer" class="form-control">
+                <select id="shipping_fee_payer" name="shipping_fee_payer" v-model="shipping_fee_payer" class="form-control">
                     <option value="">選択してください</option>
                     <option value="送料込み（出品者負担）">送料込み（出品者負担）</option>
                     <option value="着払い（購入者負担）">着払い（購入者負担）</option>
@@ -125,7 +129,9 @@
             </div>
         </div>
     <!-- ---配送元の地域--- -->
-        <PrefectureComponent></PrefectureComponent>
+        <PrefectureComponent
+        :prefecture_id = prefecture_id
+        ></PrefectureComponent>
     <!-- ---発送までの日数--- -->
         <div class="form-row">  
             <div class="form-group mt-2">
@@ -135,7 +141,7 @@
                         <p class="require font-weight-bold">必須</p>
                     </div>
                 </label>
-                <select id="shipping_days" name="shipping_days" class="form-control">
+                <select id="shipping_days" name="shipping_days" v-model="shipping_days" class="form-control">
                     <option value="">選択してください</option>
                     <option value="１〜２日で発送">１〜２日で発送</option>
                     <option value="２〜３日で発送">２〜３日で発送</option>
@@ -152,7 +158,7 @@
                         <p class="require font-weight-bold">必須</p>
                     </div>
                 </label>
-                <p class="d-flex align-items-center"><span class="mr-1">¥</span><input type="number" id="price" name="price" class="form-control text-right
+                <p class="d-flex align-items-center"><span class="mr-1">¥</span><input type="number" id="price" name="price" v-model="price" class="form-control text-right
                 " placeholder="0"></p>
                 
             </div>
@@ -171,10 +177,26 @@ export default {
         CategoryComponent,
         PrefectureComponent
     },
+    props: [
+        'old'
+    ],
     data() {
         return {
             isDrag: false,
             images: [],
+            csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            item_name: this.old.item_name,
+            description: this.old.description,
+            category_id: this.old.category_id,
+            category_children_id: this.old.category_children_id,
+            category_grand_children_id: this.old.category_grand_children_id,
+            brand_name: this.old.brand_name,
+            price: this.old.price,
+            size: this.old.size,
+            condition: '',
+            shipping_fee_payer: '',
+            prefecture_id: '',
+            shipping_days: ''
         }
     },
     methods: {
@@ -228,10 +250,34 @@ export default {
             this.DataTransfer.items.remove(index) //画像削除
         },
         filesUpload() {
+            this.oldValue();
              var input = document.querySelectorAll('input[name="files[]"]'); //input[name="files[]"を取得
             //inputにDataTransfer.files（fileList）を代入。  input[0].filesは、FileListオブジェクトしか代入できない
             input[0].files = this.DataTransfer.files; 
-        }
+        },
+        // validation() {
+        //     axios.post('item', {
+        //         item_name: this.item_name,
+        //         description: this.description,
+        //         category_id: this.category_id,
+        //         category_children_id: this.category_children_id,
+        //         category_grand_children_id: this.category_grand_children_id,
+        //         brand_name: this.brand_name,
+        //         price: this.price,
+        //         size: this.size,
+        //         condition: this.condition,
+        //         shipping_fee_payer: this.shipping_fee_payer,
+        //         prefecture_id: this.prefecture_id,
+        //         shipping_days: this.shipping_days
+        //     })
+        //     .then(response => {
+        //         console.log('success', res.data)
+        //     })
+        //     .catch(response => {
+        //         console.log(e.response.data.errors)
+        //     })
+        // }
+    
     },
     mounted() {
         window.ondrop = function(e) {
@@ -240,12 +286,23 @@ export default {
         window.ondragover = function(e) {
             e.preventDefault();
         }
-        console.log('Component mounted.')
-
         // 画像をデータを持つためのオブジェクト
         //DataTransfer.filesにFileListを持っている。
         this.DataTransfer = new DataTransfer() 
         console.log(this.DataTransfer)
+
+        if (this.old.condition != null) {
+            this.condition = this.old.condition
+        }
+        if (this.old.shipping_fee_payer != null) {
+            this.shipping_fee_payer = this.old.shipping_fee_payer
+        }
+        if (this.old.prefecture_id != null) {
+            this.prefecture_id = this.old.prefecture_id
+        }
+        if (this.old.shipping_days != null) {
+            this.shipping_days = this.old.shipping_days
+        }
     }
 }
 </script>
