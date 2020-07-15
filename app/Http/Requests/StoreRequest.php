@@ -39,7 +39,7 @@ class StoreRequest extends FormRequest
         ];
     }
 
-    public function message() {
+    public function messages() {
         return [
             'item_name.required' => '商品名を入力してください',
             'item_name.max' => '商品名を255文字以下で入力してください',
