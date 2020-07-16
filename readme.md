@@ -10,5 +10,5 @@ Vue.js&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v2.5.17
 bootstrap v4.0.0  
 docker 　 v19.03.8  
 circleci 　 v2  
-MySQL　v5.7
+MySQL　 v5.7
  
