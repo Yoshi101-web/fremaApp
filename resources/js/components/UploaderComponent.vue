@@ -195,8 +195,8 @@ export default {
             size: this.old.size,
             condition: '',
             shipping_fee_payer: '',
-            prefecture_id: '',
-            shipping_days: ''
+            prefecture_id: this.old.prefecture_id,
+            shipping_days: '',
         }
     },
     methods: {
@@ -250,34 +250,10 @@ export default {
             this.DataTransfer.items.remove(index) //画像削除
         },
         filesUpload() {
-            this.oldValue();
              var input = document.querySelectorAll('input[name="files[]"]'); //input[name="files[]"を取得
             //inputにDataTransfer.files（fileList）を代入。  input[0].filesは、FileListオブジェクトしか代入できない
             input[0].files = this.DataTransfer.files; 
         },
-        // validation() {
-        //     axios.post('item', {
-        //         item_name: this.item_name,
-        //         description: this.description,
-        //         category_id: this.category_id,
-        //         category_children_id: this.category_children_id,
-        //         category_grand_children_id: this.category_grand_children_id,
-        //         brand_name: this.brand_name,
-        //         price: this.price,
-        //         size: this.size,
-        //         condition: this.condition,
-        //         shipping_fee_payer: this.shipping_fee_payer,
-        //         prefecture_id: this.prefecture_id,
-        //         shipping_days: this.shipping_days
-        //     })
-        //     .then(response => {
-        //         console.log('success', res.data)
-        //     })
-        //     .catch(response => {
-        //         console.log(e.response.data.errors)
-        //     })
-        // }
-    
     },
     mounted() {
         window.ondrop = function(e) {
@@ -288,7 +264,8 @@ export default {
         }
         // 画像をデータを持つためのオブジェクト
         //DataTransfer.filesにFileListを持っている。
-        this.DataTransfer = new DataTransfer() 
+        this.DataTransfer = new DataTransfer();
+
         console.log(this.DataTransfer)
 
         if (this.old.condition != null) {
@@ -296,9 +273,6 @@ export default {
         }
         if (this.old.shipping_fee_payer != null) {
             this.shipping_fee_payer = this.old.shipping_fee_payer
-        }
-        if (this.old.prefecture_id != null) {
-            this.prefecture_id = this.old.prefecture_id
         }
         if (this.old.shipping_days != null) {
             this.shipping_days = this.old.shipping_days

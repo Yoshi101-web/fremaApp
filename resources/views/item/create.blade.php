@@ -32,7 +32,7 @@
                     <form method="POST" action="{{ route('item.store') }}" enctype="multipart/form-data">
                         @csrf
                         <uploader-component 
-                        :old="{{ json_encode(Session::getOldInput()) }}"
+                        :old="{{ json_encode(Session::getOldInput(), true) }}"
                         ></uploader-component>
                         
                     </form>

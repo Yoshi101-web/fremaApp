@@ -7,7 +7,7 @@
                     <p class="require font-weight-bold">必須</p>
                 </div>
             </label>
-            <select id="prefecture_id" name="prefecture_id" v-model="prefecture_id" class="form-control">
+            <select id="prefecture_id" name="prefecture_id" v-model="prefecture_value" class="form-control">
                 <option value="">選択してください</option>
                 <option v-for="(area,index) in prefecture" :value="area.id" :key="index">
                     {{ area.name }}
@@ -24,7 +24,9 @@ export default {
         'prefecture_id'
     ],
     data() {
+
         return{ 
+            prefecture_value: '',
             prefecture: [
                 {id: 1, name: '北海道'}, 
                 {id: 2, name: '青森県'}, 
@@ -74,6 +76,11 @@ export default {
                 {id: 46, name: '鹿児島県'}, 
                 {id: 47, name: '沖縄県'},
             ]
+        }
+    },
+    mounted() {
+        if (this.prefecture_id != null) {
+            this.prefecture_value = this.prefecture_id
         }
     }
 }

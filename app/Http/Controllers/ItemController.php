@@ -9,7 +9,6 @@ use App\Item;
 use App\Image;
 use App\Http\Requests\StoreRequest;
 use Illuminate\Http\Request;
-use Illuminate\Http\UploadedFile;
 
 class ItemController extends Controller
 {
@@ -54,14 +53,6 @@ class ItemController extends Controller
      */
     public function store(StoreRequest $request, Item $item)
     {
-
-        // $validator = Validator::make($request->all(), $rules, $messages);
-
-        // if($validator->fails()) {
-        //     // return redirect('item.create')->withErrors($validator)->withInput();
-        //     return redirect()->back()->withErrors($validator->errors())->withInput();
-        // }
-
         $latest  = $item->orderBy('created_at', 'DESC')->first(); //最新のitemを取得
         $item_id = 1+$latest->id; ////最新のitemのidに１プラス。
         $images  = array();  //からの配列を用意
@@ -73,6 +64,7 @@ class ItemController extends Controller
             $data      = (['image' => $path,'item_id' => $item_id]);
             $images[]  = $data;
         }
+
         $item->item_name                  = $request->item_name;
         $item->description                = $request->description;
         $item->user_id                    = Auth::user()->id;
