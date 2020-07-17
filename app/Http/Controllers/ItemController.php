@@ -30,7 +30,7 @@ class ItemController extends Controller
         if($request->has('keyword')){
             $items = Item::where('item_name', 'like', '%'.$keyword.'%')->orderBy('created_at', 'desc')->paginate(9);
         } else {
-            $items = Item::query()->orderBy('created_at', 'desc')->paginate(9);
+            $items = Item::query()->with('images')->orderBy('created_at', 'desc')->paginate(9);
         }
         return view('top', compact('items', 'keyword'));
     }
@@ -60,8 +60,8 @@ class ItemController extends Controller
         $files = $request->file('files'); //files[]を取得(複数)
         foreach($files as $file) {
             $file_name = $file->getClientOriginalName();
-            $path      = $file->storeAs('public/images',$file_name);
-            $data      = (['image' => $path,'item_id' => $item_id]);
+            $path      = $file->store('public/images'); //path以下に保存
+            $data      = (['image' => basename($path),'item_id' => $item_id]);
             $images[]  = $data;
         }
 
