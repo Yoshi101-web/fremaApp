@@ -17,9 +17,23 @@
                     <p class="text-center font-weight-bold h1 mb-0 py-3">出品</p>
                 </div>
                 <div class="card-body">
+                @if($errors->any())
+                <!-- Form Error List --> 
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+                </div>
+                <div class="card-body">
                     <form method="POST" action="{{ route('item.store') }}" enctype="multipart/form-data">
                         @csrf
-                        <uploader-component></uploader-component>
+                        <uploader-component 
+                        :old="{{ json_encode(Session::getOldInput(), true) }}"
+                        ></uploader-component>
                         
                     </form>
                 </div>

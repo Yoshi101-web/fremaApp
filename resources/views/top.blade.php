@@ -15,7 +15,15 @@
             <div class="col-md-4 mt-2">
                 <div class="card mb50">
                     <a href="{{ route('item.show', $item->id) }}" class="card-body btn">
-                        <div class="image-wrapper"><img class="img-thumbnail" src="{{ asset('images/dummy.png')}}"></div>{{-- asset('storage/images/'.$item->image) --}}
+                        @if(count($item->images) > 0)
+                            @foreach($item->images as $key => $image)
+                                @if ($key == 1)
+                                    <div class="image-wrapper"><img class="img-thumbnail" src="{{ asset('/storage/images/'.$image->image) }}"></div> {{-- asset('storage/images/'.$item->image) --}}
+                                @endif
+                            @endforeach
+                        @else
+                            <div class="image-wrapper"><img class="img-thumbnail" src="images/dummy.png"></div> {{-- asset('storage/images/'.$item->image) --}}
+                        @endif
                         <div class="justify-center align-center">
                             <p class="product-title m-auto">{{ $item->item_name }}</p>
                             <p class="product-price text-center m-auto pt-1 h4 font-weight-bold">¥{{ number_format($item->price) }}</p>
