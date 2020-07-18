@@ -23,4 +23,21 @@ class Item extends Model
     {
         return $this->hasMany('App\Image');
     }
+
+    public function getPrefNameAttribute() { // {{ $item->PrefName }}で取得
+        //pref.phpの1~47の数字をprefecture_idのカラムに保存してあるIDをもとに文字列を取得して表示
+        return config('pref.'.$this->prefecture_id);
+    }
+
+    public function getCategoryNameAttribute() {
+        return config('category.'.$this->category_id);
+    }
+
+    public function getCategoryChildrenNameAttribute() {
+        return config('categoryChildren.'.$this->category_children_id);
+    }
+
+    public function getCategoryGrandChildrenNameAttribute() {
+        return config('categoryGrandChildren.'.$this->category_grand_children_id);
+    }
 }

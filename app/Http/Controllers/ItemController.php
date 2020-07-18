@@ -92,8 +92,13 @@ class ItemController extends Controller
     public function show($id)
     {
         $item = Item::find($id);
+        $images = $item->images()->get();
+        $prefs = config('pref');
+        $prefs = config('category');
+        $prefs = config('categoryChildren');
+        $prefs = config('categoryGrandChildren');
 
-        return view('item.show',compact('item'));
+        return view('item.show',compact('item','images','prefs'));
     }
 
     /**

@@ -10,81 +10,84 @@
 @section('content')
     @include('common.header')
     <div class="container">
-        <div class="row justify-content-center m-1 p-5">
+        <div class="row justify-content-center m-1 p-5 min-vh-100">
+            <div class="col-12 text-center h2">{{ $item->item_name }}</div>
             <div class="col-4">
                 <div class="swiper-container swiper1">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide"><img class="img-thumbnail" src="{{ asset('images/dummy.png') }}"></div>
-                        <div class="swiper-slide"><img class="img-thumbnail" src="{{ asset('images/dummy.png') }}"></div>
-                        <div class="swiper-slide"><img class="img-thumbnail" src="{{ asset('images/dummy.png') }}"></div>
-                        <div class="swiper-slide"><img class="img-thumbnail" src="{{ asset('images/dummy.png') }}"></div>
-                        <div class="swiper-slide"><img class="img-thumbnail" src="{{ asset('images/dummy.png') }}"></div>
-                        <div class="swiper-slide"><img class="img-thumbnail" src="{{ asset('images/dummy.png') }}"></div>
-                        <div class="swiper-slide"><img class="img-thumbnail" src="{{ asset('images/dummy.png') }}"></div>
-                        <div class="swiper-slide"><img class="img-thumbnail" src="{{ asset('images/dummy.png') }}"></div>
-                        <div class="swiper-slide"><img class="img-thumbnail" src="{{ asset('images/dummy.png') }}"></div>
-                        <div class="swiper-slide"><img class="img-thumbnail" src="{{ asset('images/dummy.png') }}"></div>
+                    @foreach($images as $key => $image)
+                        <div class="swiper-slide d-flex align-items-center justify-content-center"><img class="img-thumbnail" src="{{ asset('/storage/images/'.$image->image) }}"></div>
+                    @endforeach
                     </div>
                     <div class="swiper-button-prev prev1"></div>
                     <div class="swiper-button-next next1"></div>
                 </div>
                 <div class="swiper-container swiper2">
                     <div class="swiper-wrapper">
-                        <!-- 各スライド -->
-                        <div class="swiper-slide"><img class="img-thumbnail" src="{{ asset('images/dummy.png') }}"></div>
-                        <div class="swiper-slide"><img class="img-thumbnail" src="{{ asset('images/dummy.png') }}"></div>
-                        <div class="swiper-slide"><img class="img-thumbnail" src="{{ asset('images/dummy.png') }}"></div>
-                        <div class="swiper-slide"><img class="img-thumbnail" src="{{ asset('images/dummy.png') }}"></div>
-                        <div class="swiper-slide"><img class="img-thumbnail" src="{{ asset('images/dummy.png') }}"></div>
-                        <div class="swiper-slide"><img class="img-thumbnail" src="{{ asset('images/dummy.png') }}"></div>
-                        <div class="swiper-slide"><img class="img-thumbnail" src="{{ asset('images/dummy.png') }}"></div>
-                        <div class="swiper-slide"><img class="img-thumbnail" src="{{ asset('images/dummy.png') }}"></div>
-                        <div class="swiper-slide"><img class="img-thumbnail" src="{{ asset('images/dummy.png') }}"></div>
-                        <div class="swiper-slide"><img class="img-thumbnail" src="{{ asset('images/dummy.png') }}"></div>
+                    <!-- 各スライド -->
+                    @foreach($images as $key => $image)
+                        <div class="swiper-slide d-flex align-items-center justify-content-center"><img class="img-thumbnail" src="{{ asset('/storage/images/'.$image->image) }}"></div>
+                    @endforeach
                     </div>
                 </div>
             </div>
-            <div class="col-2"></div>
+            <div class="col-1"></div>
             <div class="col-6">
                 <table class="table table-bordered w-10">
                     <tr>
                         <th class="table-active">出品者</th>
-                        <td>ユーザー</td>
+                        <td class="d-flex align-items-center justify-content-center"><a href="" >{{ $item->user->name }}</a></td>
                     </tr>
                     <tr>
                         <th class="table-active">カテゴリー</th>
-                        <td >レディース</td>
+                        <td class="btn w-100 pl-5" >
+                            <div class="card-body p-0 text-left">
+                                <a href="">{{ $item->CategoryName }}</a></br>
+                                > <a href="">{{ $item->CategoryChildrenName }}</a></br>
+                                > <a href="">{{ $item->CategoryGrandChildrenName }}</a>
+                            </div>
+                        </td>
                     </tr>
                     <tr>
                         <th class="table-active">ブランド</th>
-                        <td>Nike</td>
+                        <td class="text-center">{{ $item->brand_name }}</td>
                     </tr>
                     <tr>
                         <th class="table-active">商品の状態</th>
-                        <td>新品</td>
+                        <td class="text-center">{{ $item->condition }}</td>
                     </tr>
                     <tr>
                         <th class="table-active">配送料の負担</th>
-                        <td>送料込み</td>
+                        <td class="text-center">{{ $item->shipping_fee_payer }}</td>
                     </tr>
                     <tr>
                         <th class="table-active">配送の方法</th>
-                        <td>送料込み</td>
+                        <td class="text-center">{{ $item->brand_name }}</td>
                     </tr>
                     <tr>
                         <th class="table-active">配送元地域</th>
-                        <td>送料込み</td>
+                        <td class="text-center">{{ $item->prefName }}</td>
                     </tr>
                     <tr>
                         <th class="table-active">発送日の目安</th>
-                        <td>送料込み</td>
+                        <td class="text-center">{{ $item->shipping_days }}</td>
                     </tr>
                 </table>
             </div>
             <div class="col-12">
-            <h1 class="text-center font-weight-bold">¥{{ number_format(6000) }}</h1>
-            購入画面
+                <h1 class="text-center font-weight-bold my-3">¥{{ number_format($item->price) }}</h1>
+                <button type="button" class="btn btn-primary btn-lg btn-block">購入画面へ進む</button>
             </div>
+            <div class="col-12 text-center h4 my-5">{{ $item->description }}</div>
+            <div class="col-12"></div>
+            @auth
+                <div class="card-body">
+                    <form method="POST" action="">
+                        <textarea name="comment" id="comment" class="w-100" cols="30" rows="10" style="min-height: 100px;"></textarea>
+                        <button type="submit" class="btn btn-secondary btn-lg btn-block">コメントをする</button>
+                    </form>
+                </div>
+            @endauth
         </div>
     </div>
     @include('common.footer')
