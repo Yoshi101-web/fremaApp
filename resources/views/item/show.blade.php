@@ -60,7 +60,7 @@
                     </tr>
                     <tr>
                         <th class="table-active">配送元地域</th>
-                        <td class="text-center">{{ $item->prefecture_id }}</td>
+                        <td class="text-center">{{ $item->prefName }}</td>
                     </tr>
                     <tr>
                         <th class="table-active">発送日の目安</th>

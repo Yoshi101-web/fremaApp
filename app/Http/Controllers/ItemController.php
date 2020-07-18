@@ -93,7 +93,9 @@ class ItemController extends Controller
     {
         $item = Item::find($id);
         $images = $item->images()->get();
-        return view('item.show',compact('item','images'));
+        $prefs = config('pref');
+
+        return view('item.show',compact('item','images','prefs'));
     }
 
     /**
