@@ -40,7 +40,13 @@
                     </tr>
                     <tr>
                         <th class="table-active">カテゴリー</th>
-                        <td class="btn w-100" ><a href="">{{ $item->category_id }}</a> > <a href="">{{ $item->category_children_id }}</a> > <a href="">{{ $item->category_grand_children_id }}</a></td>
+                        <td class="btn w-100 pl-5" >
+                            <div class="card-body p-0 text-left">
+                                <a href="">{{ $item->CategoryName }}</a></br>
+                                > <a href="">{{ $item->CategoryChildrenName }}</a></br>
+                                > <a href="">{{ $item->CategoryGrandChildrenName }}</a>
+                            </div>
+                        </td>
                     </tr>
                     <tr>
                         <th class="table-active">ブランド</th>
